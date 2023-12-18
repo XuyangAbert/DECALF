@@ -1,0 +1,127 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Oct  5 11:53:01 2022
+
+@author: Xuyang
+"""
+
+import torch
+from math import exp
+import numpy as np
+from .strategy import Strategy
+from .fps_clustering import fps_analysis
+
+from scipy.spatial.distance import pdist,squareform
+import numpy as np
+import time
+import pandas as pd
+import numpy.matlib
+from math import exp
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.neural_network import MLPClassifier
+from sklearn.metrics import f1_score,precision_score,auc
+from sklearn.metrics import accuracy_score,recall_score
+from sklearn.linear_model import LogisticRegression as LR
+from sklearn.svm import SVC,LinearSVC
+import warnings
+warnings.filterwarnings("ignore", category=np.VisibleDeprecationWarning)
+
+class ALCS_Diversity(Strategy):
+  def __init__(self, dataset, net, args_input, args_task):
+    super(ALCS_Diversity, self).__init__(dataset, net, args_input, args_task)
+
+  def diversityfetch1(self, candidate_fet1, current, priority1, interd1, dth, fetchsize):
+    fetch1 = []
+    num_center = fetchsize
+    chunked_dist1 = interd1[candidate_fet1]
+    chunked_dist = chunked_dist1[:, candidate_fet1]
+    for i in range(num_center):
+      top_idx = np.argmax(priority1)
+      fetch1.append(current[candidate_fet1[top_idx]])
+      neighbordist = chunked_dist[top_idx, :]
+      neighboridx = np.where(neighbordist <= dth)[0]
+      priority1[top_idx] = priority1[top_idx] / (1 + 20 * np.sum(priority1[neighboridx]))
+      priority1[neighboridx] = priority1[neighboridx] / (1 + np.sum(priority1[neighboridx]))
+    fetch1 = np.asarray(fetch1)
+    fetch1 = fetch1.astype(int)
+    return fetch1
+
+  def diversityfetch2(self, candidate_fet2, current, priority2, interd1, dth, fetchsize):
+    fetch2 = []
+    num_border = fetchsize
+    chunked_dist1 = interd1[candidate_fet2]
+    chunked_dist = chunked_dist1[:, candidate_fet2]
+    for i in range(num_border):
+      top_idx = np.argmax(priority2)
+      fetch2.append(current[candidate_fet2[top_idx]])
+      neighbordist = chunked_dist[top_idx][:]
+      neighboridx = np.where(neighbordist <= dth)[0]
+      priority2[top_idx] = priority2[top_idx] / (1 + 200 * np.sum(priority2[neighboridx]))
+      priority2[neighboridx] = priority2[neighboridx] / (1 + np.sum(priority2[neighboridx]))
+    fetch2 = np.asarray(fetch2)
+    fetch2 = fetch2.astype(int)
+    return fetch2
+
+  def active_query(self, samples, cluster_centers, cluster_idx, label_budget):
+    query_idx = []
+    dist_cluster = squareform(pdist(cluster_centers))
+
+    for i in range(np.shape(cluster_centers)[0]):
+      curr_cluster = np.where(cluster_idx == i)[0]
+      curr_dist = squareform(pdist(samples[curr_cluster]))
+      num_queries = round(label_budget * len(curr_dist) / np.shape(samples)[0])
+      num_nei = round(len(curr_cluster) ** 0.5)
+      knei_dist, query_priority = [], []
+      temp_interdist = dist_cluster[i, :]
+      if len(curr_cluster) < 2:
+        continue
+      temp_neigh1 = cluster_centers[np.argsort(temp_interdist)[0], :]
+      temp_neigh2 = cluster_centers[np.argsort(temp_interdist)[1], :]
+      for j in range(len(curr_cluster)):
+        query_priority.append(1 + exp(-np.linalg.norm(samples[curr_cluster[j], :] - cluster_centers[i, :])))
+        knei_dist.append(np.mean(curr_dist[j, :num_nei]))
+      sortIndex1 = np.argsort(query_priority)
+      sortIndex1 = sortIndex1[::-1]
+      dth = np.mean(knei_dist)
+      query_priority = np.array(query_priority)
+      fet1 = self.diversityfetch1(sortIndex1[:round(len(query_priority) / 2)],
+                                  curr_cluster,
+                                  query_priority[sortIndex1[:round(len(query_priority) / 2)]],
+                                  curr_dist, dth, round(num_queries * 0.5))
+      fil_index = sortIndex1[-int(round(len(query_priority) / 2)):]
+      d2 = []
+      for k in range(len(fil_index)):
+        temp_d1 = np.linalg.norm(samples[curr_cluster[fil_index[k]], :] - temp_neigh1)
+        temp_d2 = np.linalg.norm(samples[curr_cluster[fil_index[k]], :] - temp_neigh2)
+        temp_ratio1 = max(temp_d1, temp_d2) / min(temp_d1, temp_d2)
+        d2.append(temp_ratio1)
+      sortIndex2 = np.argsort(d2)
+      candidate_fet2 = fil_index[sortIndex2[:int(round(num_queries * 0.8))]]
+      sum_dist = []
+      for ii in range(len(candidate_fet2)):
+        candidate_d1 = np.linalg.norm(samples[curr_cluster[candidate_fet2[ii]], :] - temp_neigh1)
+        candidate_d2 = np.linalg.norm(samples[curr_cluster[candidate_fet2[ii]], :] - temp_neigh1)
+        sum_dist.append(1 + 1 / (1 + candidate_d1 + candidate_d2))
+      sortIndex3 = np.argsort(sum_dist)
+      sortIndex3 = sortIndex3[::-1]
+      sum_dist = np.array(sum_dist)
+      fet2 = self.diversityfetch2(candidate_fet2, curr_cluster,
+                                  sum_dist, curr_dist, dth,
+                                  round(num_queries * 0.5))
+      query_idx = np.append(query_idx, fet1)
+      query_idx = np.append(query_idx, fet2)
+    return query_idx
+
+  def query(self, label_budget):
+    unlabeled_idxs, unlabeled_data = self.dataset.get_unlabeled_data()
+    embedding_unlabeled = self.get_embeddings(unlabeled_data).numpy()
+    embedding_unlabeled = unlabeled_data.numpy()
+    # embedding_unlabeled = self.get_embedding(self.unlabeled_dataset)
+    clustering_model = fps_analysis()
+    cluster_centers, cluster_idx, cluster_dist = clustering_model.predict(embedding_unlabeled)
+    print("fps-clustering stage finish!")
+    query_idx = self.active_query(embedding_unlabeled, cluster_centers, cluster_idx, label_budget)
+    query_idx = query_idx.astype(int)
+    return unlabeled_idxs[query_idx]
