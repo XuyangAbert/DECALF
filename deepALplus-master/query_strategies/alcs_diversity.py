@@ -117,7 +117,7 @@ class ALCS_Diversity(Strategy):
   def query(self, label_budget):
     unlabeled_idxs, unlabeled_data = self.dataset.get_unlabeled_data()
     embedding_unlabeled = self.get_embeddings(unlabeled_data).numpy()
-    embedding_unlabeled = unlabeled_data.numpy()
+    # embedding_unlabeled = unlabeled_data.numpy()
     # embedding_unlabeled = self.get_embedding(self.unlabeled_dataset)
     clustering_model = fps_analysis()
     cluster_centers, cluster_idx, cluster_dist = clustering_model.predict(embedding_unlabeled)
