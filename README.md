@@ -4,7 +4,15 @@ This project extends the ALCS algorithm to deep learning problems in image class
 
 ## Example Usage
 
-Use the google colab with A100 GPU instance by running the `deepalplus_alcs.ipynb` file.
+For the pytorch implementation, use the google colab with A100 GPU instance by running the `deepalplus_alcs.ipynb` file.
+
+For users who prefer to use the tensorflow, the implementation of DeepALCS method for CIFAR-10, 100, and SVHN datasets can be found from the following files:
+
+1. `DeepAL1.ipynb`
+2. `DeepAL2.ipynb`
+3. `DeepAL3.ipynb`
+
+More ogranized code structure will be implement as the project goes on!
 
 ## Dependencies
 1. numpy
