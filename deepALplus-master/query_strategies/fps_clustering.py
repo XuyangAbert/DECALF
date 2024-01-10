@@ -40,7 +40,8 @@ class fps_analysis(object):
         Dist = self.distance_cal(Newsample)
         fitness = []
         for i in range(Np):
-            distArray = np.power(Dist[i + Ns, 0:Ns], 2)
+            # distArray = np.power(Dist[i + Ns, 0:Ns], 2)
+            distArray = Dist[i + Ns, 0:Ns]
             temp = np.power(np.exp(-distArray / stdData), gamma)
             fitness.append(np.sum(temp))
         return fitness
@@ -61,7 +62,8 @@ class fps_analysis(object):
                         break
                     else:
                         d = np.linalg.norm(Current[i][:] - PreP[j][:])
-                        fitin += (exp(-d ** 2 / stdData) ** gamma) * (PreFit[j] ** (OldStd / stdData))
+                        # fitin += (exp(-d ** 2 / stdData) ** gamma) * (PreFit[j] ** (OldStd / stdData))
+                        fitin += (exp(-d / stdData) ** gamma) * (PreFit[j] ** (OldStd / stdData))
                 NewFit[i] = fitness[i] + fitin
         return NewFit
 
@@ -121,7 +123,8 @@ class fps_analysis(object):
             den1 = []
             den2 = []
             for i in range(N - 1):
-                Diff = np.power(Dist[i, :], 2)
+                # Diff = np.power(Dist[i, :], 2)
+                Diff = Dist[i, :]
                 temp1 = np.power(np.exp(-Diff / stdData), gamma * m)
                 temp2 = np.power(np.exp(-Diff / stdData), gamma * (m + 1))
                 den1.append(np.sum(temp1))
@@ -147,7 +150,8 @@ class fps_analysis(object):
             den1 = []
             den2 = []
             for i in range(N):
-                Diff = np.power(Dist[i, 0:N1], 2)
+                # Diff = np.power(Dist[i, 0:N1], 2)
+                Diff = Dist[i, 0:N1]
                 temp1 = np.power(np.exp(-Diff / stdData), gam1)
                 temp2 = np.power(np.exp(-Diff / stdData), gam2)
                 sum1 = np.sum(temp1)
@@ -160,11 +164,7 @@ class fps_analysis(object):
                         T2 += P_F[j] ** (gam2 / gamma)
                     s1 = sum1 + T1
                     s2 = sum2 + T2
-                #                s1 = sum1**(gam1/gamma) + T1
-                #                s2 = sum2**(gam2/gamma) + T2
                 else:
-                    #                s1 = sum1**(gam1/gamma) + P_F[i-N1]**(gam1/gamma)
-                    #                s2 = sum2**(gam2/gamma) + P_F[i-N1]**(gam2/gamma)
                     s1 = sum1 + P_F[i - N1] ** (gam1 / gamma)
                     s2 = sum2 + P_F[i - N1] ** (gam2 / gamma)
                 den1.append(s1)
