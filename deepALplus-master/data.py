@@ -4,6 +4,7 @@ import random
 import os
 from torchvision import datasets
 from PIL import Image
+from sklearn.metrics import f1_score
 
 class Data:
     def __init__(self, X_train, Y_train, X_test, Y_test, handler, args_task):
@@ -59,6 +60,9 @@ class Data:
 
     def cal_test_acc(self, preds):
         return 1.0 * (self.Y_test==preds).sum().item() / self.n_test
+
+    def cal_test_f1(self, preds):
+        return f1_score(self.Y_test, preds, average='macro')
 
     
 def get_MNIST(handler, args_task):
