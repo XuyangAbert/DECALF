@@ -41,7 +41,8 @@ class fps_analysis(object):
         fitness = []
         for i in range(Np):
             # distArray = np.power(Dist[i + Ns, 0:Ns], 2)
-            distArray = np.power(Dist[i + Ns, 0:Ns], 1)
+            # distArray = np.power(Dist[i + Ns, 0:Ns], 1)
+            distArray = Dist[i + Ns, 0:Ns]
             temp = np.power(np.exp(-distArray / stdData), gamma)
             fitness.append(np.sum(temp))
         return fitness
@@ -88,7 +89,7 @@ class fps_analysis(object):
         pop_Index = np.arange(0, N)
         pop = sample[pop_Index, :]
         # Calculate the initial niche radius
-        radius = numpy.linalg.norm((maxLimit - minLimit)) * 0.3  # 0.6
+        radius = numpy.linalg.norm((maxLimit - minLimit)) * 0.2  # 0.6
 
         return [stdData, pop_Index, pop, radius, PreMu, PreStd]
 
@@ -125,7 +126,8 @@ class fps_analysis(object):
             den2 = []
             for i in range(N - 1):
                 # Diff = np.power(Dist[i, :], 2)
-                Diff = np.power(Dist[i, :], 1)
+                # Diff = np.power(Dist[i, :], 1)
+                Diff = Dist[i, :]
                 temp1 = np.power(np.exp(-Diff / stdData), gamma * m)
                 temp2 = np.power(np.exp(-Diff / stdData), gamma * (m + 1))
                 den1.append(np.sum(temp1))
@@ -152,7 +154,8 @@ class fps_analysis(object):
             den2 = []
             for i in range(N):
                 # Diff = np.power(Dist[i, 0:N1], 2)
-                Diff = np.power(Dist[i, 0:N1], 1)
+                # Diff = np.power(Dist[i, 0:N1], 1)
+                Diff = Dist[i, 0:N1]
                 temp1 = np.power(np.exp(-Diff / stdData), gam1)
                 temp2 = np.power(np.exp(-Diff / stdData), gam2)
                 sum1 = np.sum(temp1)
