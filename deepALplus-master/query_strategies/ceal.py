@@ -44,7 +44,7 @@ class CEALSampling(Strategy):
 		self.args_input = args_input
 		self.args_task = args_task
 		# self.delta = self.args_input.delta
-		self.delta = 5 * 1e-5
+		self.delta = 5 * 0.00001
 
 		self.strategy_list = []
 		self.strategy_list.append(RandomSampling(dataset, net, args_input, args_task))
