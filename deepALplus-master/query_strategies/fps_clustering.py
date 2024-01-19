@@ -526,7 +526,7 @@ class fps_analysis(object):
             P, P_fitness = self.ce_inchunk(sample, P, P_fitness, stdData, gamma)
             P_fitness = self.fitness_cal(sample, P, stdData, gamma)
             P_fitness = self.fitness_update(P_Summary, P, P_fitness, PreStd, gamma, stdData)
-            # print('Processing Data Chunk ' + str(t))
+            print('Processing Data Chunk ' + str(t))
             if t == 0:
                 P = P
                 PF = np.asarray(P_fitness)
