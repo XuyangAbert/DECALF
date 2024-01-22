@@ -27,3 +27,4 @@ More ogranized code structure will be implement as the project goes on!
 10. toma==1.1.0
 11. opencv-python==4.5.5.64
 12. wilds==2.0.0
+
