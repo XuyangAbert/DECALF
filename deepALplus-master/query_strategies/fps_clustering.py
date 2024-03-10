@@ -204,10 +204,10 @@ class fps_analysis(object):
 
             Ind = self.assigntopeaks(Pop, Pop_Index, P, P_Indice, marked, radius, Dist)
 
-            marked += Ind
+            marked_updated = marked + Ind
+            marked = marked_updated
             print("Number of marked samples 1: ",len(marked))
-            print(np.shape(NewIndice[0]))
-            marked += NewIndice[0]
+            marked += [NewIndice[0]]
             print("Number of marked samples 2: ",len(marked))
 
             if not Ind:
