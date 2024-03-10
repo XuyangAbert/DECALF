@@ -205,7 +205,9 @@ class fps_analysis(object):
             Ind = self.assigntopeaks(Pop, Pop_Index, P, P_Indice, marked, radius, Dist)
 
             marked += Ind
+            print("Number of marked samples 1: ",len(marked))
             marked += NewIndice[0]
+            print("Number of marked samples 2: ",len(marked))
 
             if not Ind:
                 Ind = [NewIndice[0]]
@@ -443,10 +445,10 @@ class fps_analysis(object):
         [N, L] = np.shape(pop)
         for i in range(N):
             distance = Dist[i, P_I]
-            print("List of marked index: ", marked)
+            # print("List of marked index: ", marked)
             # marked = np.array(marked)
-            print("Pop index: ", pop_index[i])
-            if not np.isin(marked, pop_index[i]):
+            # print("Pop index: ", pop_index[i])
+            if not np.any(marked==pop_index[i]):
                 if distance < radius:
                     temp.append(pop_index[i])
         indices = temp
