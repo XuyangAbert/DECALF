@@ -206,9 +206,9 @@ class fps_analysis(object):
 
             marked_updated = marked + Ind
             marked = marked_updated
-            print("Number of marked samples 1: ",len(marked))
+            # print("Number of marked samples 1: ",len(marked))
             marked += [NewIndice[0]]
-            print("Number of marked samples 2: ",len(marked))
+            # print("Number of marked samples 2: ",len(marked))
 
             if not Ind:
                 Ind = [NewIndice[0]]
