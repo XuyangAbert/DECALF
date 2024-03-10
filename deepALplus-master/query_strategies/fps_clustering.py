@@ -204,8 +204,8 @@ class fps_analysis(object):
 
             Ind = self.assigntopeaks(Pop, Pop_Index, P, P_Indice, marked, radius, Dist)
 
-            marked.append(Ind)
-            marked.append(NewIndice[0])
+            marked += Ind
+            marked += NewIndice[0]
 
             if not Ind:
                 Ind = [NewIndice[0]]
