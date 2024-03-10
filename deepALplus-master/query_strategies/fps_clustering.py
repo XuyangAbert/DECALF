@@ -443,6 +443,7 @@ class fps_analysis(object):
         [N, L] = np.shape(pop)
         for i in range(N):
             distance = Dist[i, P_I]
+            marked = np.array(marked)
             if not np.any(marked == pop_index[i]):
                 if distance < radius:
                     temp.append(pop_index[i])
