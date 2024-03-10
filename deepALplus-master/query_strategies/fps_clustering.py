@@ -206,6 +206,7 @@ class fps_analysis(object):
 
             marked += Ind
             print("Number of marked samples 1: ",len(marked))
+            print(np.shape(NewIndice[0]))
             marked += NewIndice[0]
             print("Number of marked samples 2: ",len(marked))
 
