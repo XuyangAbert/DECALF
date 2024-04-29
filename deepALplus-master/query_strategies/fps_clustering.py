@@ -21,7 +21,7 @@ class fps_analysis(object):
         pass
 
     def paramspec(self, data):
-        Buffersize = 500
+        Buffersize = 1000
         PreStd = []
         P_Summary = []
         PFS = []
