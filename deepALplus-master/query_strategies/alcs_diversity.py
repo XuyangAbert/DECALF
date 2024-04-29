@@ -98,7 +98,7 @@ class ALCS_Diversity(Strategy):
         temp_ratio1 = max(temp_d1, temp_d2) / min(temp_d1, temp_d2)
         d2.append(temp_ratio1)
       sortIndex2 = np.argsort(d2)
-      candidate_fet2 = fil_index[sortIndex2[:int(round(num_queries * 1))]]
+      candidate_fet2 = fil_index[sortIndex2[:int(round(num_queries * 1))]] # 0.8
       sum_dist = []
       for ii in range(len(candidate_fet2)):
         candidate_d1 = np.linalg.norm(samples[curr_cluster[candidate_fet2[ii]], :] - temp_neigh1)
