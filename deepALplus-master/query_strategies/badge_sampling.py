@@ -75,8 +75,8 @@ import torch
 from torch import nn
 import torchfile
 from torch.autograd import Variable
-import resnet
-import vgg
+# import resnet
+# import vgg
 import torch.optim as optim
 import pdb
 from torch.nn import functional as F
