@@ -43,7 +43,7 @@ class ALCS_Diversity(Strategy):
       neighbordist = chunked_dist[top_idx, :]
       neighboridx = np.where(neighbordist <= dth)[0]
       priority1[top_idx] = priority1[top_idx] / (1 + 200 * np.sum(priority1[neighboridx]))
-      priority1[neighboridx] = priority1[neighboridx] / (1 + 200 * np.sum(priority1[neighboridx]))
+      priority1[neighboridx] = priority1[neighboridx] / (1 + 1 * np.sum(priority1[neighboridx]))
     fetch1 = np.asarray(fetch1)
     fetch1 = fetch1.astype(int)
     return fetch1
@@ -59,7 +59,7 @@ class ALCS_Diversity(Strategy):
       neighbordist = chunked_dist[top_idx][:]
       neighboridx = np.where(neighbordist <= dth)[0]
       priority2[top_idx] = priority2[top_idx] / (1 + 200 * np.sum(priority2[neighboridx]))
-      priority2[neighboridx] = priority2[neighboridx] / (1 + 200 * np.sum(priority2[neighboridx]))
+      priority2[neighboridx] = priority2[neighboridx] / (1 + 1 * np.sum(priority2[neighboridx]))
     fetch2 = np.asarray(fetch2)
     fetch2 = fetch2.astype(int)
     return fetch2
@@ -73,7 +73,7 @@ class ALCS_Diversity(Strategy):
       curr_dist = squareform(pdist(samples[curr_cluster]))
       num_queries = round(label_budget * len(curr_dist) / np.shape(samples)[0])
       num_nei = round(len(curr_cluster) ** 0.5)
-      num_nei = 5
+      num_nei = 3
       knei_dist, query_priority = [], []
       temp_interdist = dist_cluster[i, :]
       if len(curr_cluster) < 2:
@@ -85,7 +85,7 @@ class ALCS_Diversity(Strategy):
         knei_dist.append(np.mean(curr_dist[j, :num_nei]))
       sortIndex1 = np.argsort(query_priority)
       sortIndex1 = sortIndex1[::-1]
-      dth = np.mean(knei_dist)
+      dth = 0.5* np.mean(knei_dist)
       query_priority = np.array(query_priority)
       fet1 = self.diversityfetch1(sortIndex1[:round(len(query_priority) / 2)],
                                   curr_cluster,
