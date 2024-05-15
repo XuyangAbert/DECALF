@@ -89,7 +89,7 @@ class fps_analysis(object):
         pop_Index = np.arange(0, N)
         pop = sample[pop_Index, :]
         # Calculate the initial niche radius
-        radius = numpy.linalg.norm((maxLimit - minLimit)) * 0.4  # 0.4
+        radius = numpy.linalg.norm((maxLimit - minLimit)) * 0.3  # 0.4
 
         return [stdData, pop_Index, pop, radius, PreMu, PreStd]
 
