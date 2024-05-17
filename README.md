@@ -1,18 +1,14 @@
-## Getting Start
-### Description: 
-This project extends the ALCS algorithm to deep learning problems in image classification tasks. It utilized the architucture from DeepALplus toolkit and integrated the ALCS method into it.
+# My Paper Title
 
-## Example Usage
+This repository is the official implementation of [Deep Active Learning using Clustering-based Sampling for High-dimensional Image Classification]. 
 
-For the pytorch implementation, use the google colab with A100 GPU instance by running the `deepalplus_alcs.ipynb` file.
+## Requirements
 
-For users who prefer to use the tensorflow, the implementation of DeepALCS method for CIFAR-10, 100, and SVHN datasets can be found from the following files:
+To install requirements:
 
-1. `DeepAL1.ipynb`
-2. `DeepAL2.ipynb`
-3. `DeepAL3.ipynb`
-
-More ogranized code structure will be implement as the project goes on!
+```setup
+pip install -r requirements.txt
+```
 
 ## Dependencies
 1. numpy
@@ -28,3 +24,29 @@ More ogranized code structure will be implement as the project goes on!
 11. opencv-python==4.5.5.64
 12. wilds==2.0.0
 
+## Example running experiments
+For the pytorch implementation, use the google colab with A100 GPU instance by running the `deepalplus_alcs.ipynb` file.
+
+For users who prefer to use the tensorflow, the implementation of DeepALCS method for CIFAR-10, 100, and SVHN datasets can be found from the following files:
+
+1. `DeepAL1.ipynb`
+2. `DeepAL2.ipynb`
+3. `DeepAL3.ipynb`
+
+
+## Results
+
+Our model achieves the following performance on :
+
+### [Image Classification on ImageNet](https://paperswithcode.com/sota/image-classification-on-imagenet)
+
+| Model name         | Top 1 Accuracy  | Top 5 Accuracy |
+| ------------------ |---------------- | -------------- |
+| My awesome model   |     85%         |      95%       |
+
+>📋  Include a table of results from your paper, and link back to the leaderboard for clarity and context. If your main result is a figure, include that figure and link to the command or notebook to reproduce it. 
+
+
+## Contributing
+
+>📋  Pick a licence and describe how to contribute to your code repository. 
