@@ -85,7 +85,7 @@ class ALCS_Diversity(Strategy):
         knei_dist.append(np.mean(curr_dist[j, :num_nei]))
       sortIndex1 = np.argsort(query_priority)
       sortIndex1 = sortIndex1[::-1]
-      dth = 0.5* np.mean(knei_dist)
+      dth = 0.1* np.mean(knei_dist)
       query_priority = np.array(query_priority)
       fet1 = self.diversityfetch1(sortIndex1[:round(len(query_priority) / 2)],
                                   curr_cluster,
