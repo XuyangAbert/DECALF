@@ -1,6 +1,6 @@
 # My Paper Title
 
-This repository is the official implementation of [Deep Active Learning using Clustering-based Sampling for High-dimensional Image Classification]. 
+This repository is the official implementation of [To be added]. 
 
 ## Requirements
 
@@ -49,4 +49,4 @@ Our model achieves the following performance on :
 
 ## Contributing
 
->📋  Pick a licence and describe how to contribute to your code repository. 
+>📋  Pick a licence and describe how to contribute to your code repository.
