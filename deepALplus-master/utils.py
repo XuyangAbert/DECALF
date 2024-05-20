@@ -241,8 +241,8 @@ def get_strategy(STRATEGY_NAME, dataset, net, args_input, args_task):
 		return EntropySamplingDropout(dataset, net, args_input, args_task)
 	elif STRATEGY_NAME == 'KMeansSampling':
 		return KMeansSampling(dataset, net, args_input, args_task)
-	elif STRATEGY_NAME == 'ALCS_Diversity':
-		return ALCS_Diversity(dataset, net, args_input, args_task)
+	elif STRATEGY_NAME == 'CALFD':
+		return CALFD(dataset, net, args_input, args_task)
 	elif STRATEGY_NAME == 'KMeansSamplingGPU':
 		return KMeansSamplingGPU(dataset, net, args_input, args_task)
 	elif STRATEGY_NAME == 'KCenterGreedy':
