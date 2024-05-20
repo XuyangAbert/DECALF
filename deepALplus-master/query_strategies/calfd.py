@@ -30,7 +30,7 @@ warnings.filterwarnings("ignore", category=np.VisibleDeprecationWarning)
 
 class CALFD(Strategy):
   def __init__(self, dataset, net, args_input, args_task):
-    super(ALCS_Diversity, self).__init__(dataset, net, args_input, args_task)
+    super(CALFD, self).__init__(dataset, net, args_input, args_task)
 
   def diversityfetch1(self, candidate_fet1, current, priority1, interd1, dth, fetchsize):
     fetch1 = []
