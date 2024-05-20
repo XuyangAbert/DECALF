@@ -1,1 +1,12 @@
-ddd
+numpy
+scipy
+torch
+torchvision
+scikit-learn
+tqdm
+ipdb==0.13.9
+openml==0.12.2
+faiss-gpu==1.7.2
+toma==1.1.0
+opencv-python==4.5.5.64
+wilds==2.0.0
