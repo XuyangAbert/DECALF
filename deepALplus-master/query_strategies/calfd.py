@@ -28,7 +28,7 @@ from sklearn.svm import SVC,LinearSVC
 import warnings
 warnings.filterwarnings("ignore", category=np.VisibleDeprecationWarning)
 
-class ALCS_Diversity(Strategy):
+class CALFD(Strategy):
   def __init__(self, dataset, net, args_input, args_task):
     super(ALCS_Diversity, self).__init__(dataset, net, args_input, args_task)
 
