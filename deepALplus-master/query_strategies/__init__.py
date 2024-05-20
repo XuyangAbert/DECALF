@@ -10,7 +10,7 @@ from .kcenter_greedy import KCenterGreedy
 from .bayesian_active_learning_disagreement_dropout import BALDDropout
 from .adversarial_bim import AdversarialBIM
 from .adversarial_deepfool import AdversarialDeepFool
-from .alcs_diversity import ALCS_Diversity
+from .calfd import CALFD
 
 from .kcenter_greedy_pca import KCenterGreedyPCA
 from .kmeans_sampling_gpu import KMeansSamplingGPU
