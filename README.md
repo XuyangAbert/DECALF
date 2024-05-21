@@ -27,7 +27,10 @@ pip install -r requirements.txt
 ## Example running experiments
 For the pytorch implementation, use the google colab with A100 GPU instance by running the `calfd_pytorch_demo.py` file.
 
-User can change the variable `ALStrategy` to change the AL method.
+User can change the variable `ALStrategy` to change the AL method. The label budget can be adjusted by adjusting the parameters below:
+`initseed`: the size of initial label set for training the base learner. We set it as 100 for all AL methods in FashionMNIST, CIFAR-10, and SVHN datasets. For CIFAR-100 and TinyImageNet, we set it to be 500 and 1000 respectively.
+`NUM_QUERY`: the label budget after the initial model has been trained.
+`NUM_ROUNDS`: we set it as 1 to conduct single round query.
 
 
 ## Results
