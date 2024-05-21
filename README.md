@@ -27,6 +27,8 @@ pip install -r requirements.txt
 ## Example running experiments
 For the pytorch implementation, use the google colab with A100 GPU instance by running the `calfd_pytorch_demo.py` file.
 
+User can change the variable `ALStrategy` to change the AL method.
+
 
 ## Results
 
