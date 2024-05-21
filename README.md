@@ -25,13 +25,7 @@ pip install -r requirements.txt
 12. wilds==2.0.0
 
 ## Example running experiments
-For the pytorch implementation, use the google colab with A100 GPU instance by running the `calfd_pytorch_demo.ipynb` file.
-
-For users who prefer to use the tensorflow, the implementation of DeepALCS method for CIFAR-10, 100, and SVHN datasets can be found from the following files:
-
-1. `calfd_tensorflow_1.ipynb`
-2. `calfd_tensorflow_2.ipynb`
-3. `calfd_tensorflow_3.ipynb`
+For the pytorch implementation, use the google colab with A100 GPU instance by running the `calfd_pytorch_demo.py` file.
 
 
 ## Results
