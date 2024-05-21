@@ -1,6 +1,6 @@
 # My Paper Title
 
-This repository is the official implementation of [To be added]. 
+This repository is the official implementation of [Deep Active Learning using Clustering-based Sampling for High-dimensional Image Classification]. 
 
 ## Requirements
 
@@ -38,11 +38,35 @@ For users who prefer to use the tensorflow, the implementation of DeepALCS metho
 
 Our model achieves the following performance on :
 
-### [Image Classification on ImageNet](https://paperswithcode.com/sota/image-classification-on-imagenet)
+### [Image Classification on FashionMNIST](https://paperswithcode.com/dataset/fashion-mnist)
 
-| Model name         | Top 1 Accuracy  | Top 5 Accuracy |
+| Model name         | Top 1 Accuracy (20% labeled data) | F1 score (20% labeled data) |
 | ------------------ |---------------- | -------------- |
-| My awesome model   |     85%         |      95%       |
+| ResNet-18 + CALFD (Proposed) |     88.78%         |      88.50%       |
+
+### [Image Classification on CIFAR-10](https://paperswithcode.com/dataset/cifar-10)
+
+| Model name         | Top 1 Accuracy (20% labeled data) | F1 score (20% labeled data) |
+| ------------------ |---------------- | -------------- |
+| ResNet-18 + CALFD (Proposed) |     74.47%         |      74.28%       |
+
+### [Image Classification on CIFAR-100](https://paperswithcode.com/dataset/cifar-100)
+
+| Model name         | Top 1 Accuracy (20% labeled data) | F1 score (20% labeled data) |
+| ------------------ |---------------- | -------------- |
+| ResNet-18 + CALFD (Proposed) |     54.98%         |      54.79%       |
+
+### [Image Classification on SVHN](https://paperswithcode.com/dataset/svhn)
+
+| Model name         | Top 1 Accuracy (20% labeled data) | F1 score (20% labeled data) |
+| ------------------ |---------------- | -------------- |
+| ResNet-18 + CALFD (Proposed) |     90.23%         |      89.43%       |
+
+### [Image Classification on TinyImageNet](https://paperswithcode.com/dataset/tiny-imagenet)
+
+| Model name         | Top 1 Accuracy (20% labeled data) | F1 score (20% labeled data) |
+| ------------------ |---------------- | -------------- |
+| ResNet-18 + CALFD (Proposed) |     38.93%         |      38.66%       |
 
 >📋  Include a table of results from your paper, and link back to the leaderboard for clarity and context. If your main result is a figure, include that figure and link to the command or notebook to reproduce it. 
 
