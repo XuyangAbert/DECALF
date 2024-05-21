@@ -4,6 +4,8 @@ import random
 import os
 from torchvision import datasets
 from PIL import Image
+import requests
+import zipfile
 from sklearn.metrics import f1_score
 
 class Data:
@@ -64,7 +66,28 @@ class Data:
     def cal_test_f1(self, preds):
         return f1_score(self.Y_test, preds, average='macro')
 
-    
+def download_and_unzip(url, extract_to='.'):
+    """
+    Download a zip file from a URL and unzip it in the specified directory.
+
+    Parameters:
+        url (str): URL to the zip file.
+        extract_to (str): Directory path where the contents will be extracted.
+    """
+    local_zip_path = os.path.join(extract_to, 'tiny-imagenet.zip')
+
+    # Downloading the file by streaming the response
+    response = requests.get(url, stream=True)
+    with open(local_zip_path, 'wb') as f:
+        for chunk in response.iter_content(chunk_size=128):
+            f.write(chunk)
+    # Extracting the zip file
+    with zipfile.ZipFile(local_zip_path, 'r') as z:
+        z.extractall(path=extract_to)
+    os.remove(local_zip_path)
+    print("Downloaded and extracted Tiny ImageNet")
+
+
 def get_MNIST(handler, args_task):
     raw_train = datasets.MNIST('./data/MNIST', train=True, download=True)
     raw_test = datasets.MNIST('./data/MNIST', train=False, download=True)
@@ -117,6 +140,14 @@ def get_CIFAR100(handler, args_task):
 
 def get_TinyImageNet(handler, args_task):
     import cv2
+    # URL to the Tiny ImageNet dataset (you might need to update this URL)
+    url = "http://cs231n.stanford.edu/tiny-imagenet-200.zip"
+    
+    # Directory where the dataset will be extracted
+    extract_to = "./data/TinyImageNet"
+    os.makedirs(extract_to, exist_ok=True)
+    download_and_unzip(url, extract_to)
+    
     #download data from http://cs231n.stanford.edu/tiny-imagenet-200.zip and unzip it into ./data/TinyImageNet
     # deal with training set
     Y_train_t = []
