@@ -35,6 +35,13 @@ User can change the variable `ALStrategy` to change the AL method. The label bud
 
 `NUM_ROUNDS`: we set it as 1 to conduct single round query.
 
+To change the dataset name, please adjust the variable `DATA_NAME` to select from the datasets below:
+1. FashionMNIST
+2. CIFAR10
+3. CIFAR100
+4. SVHN
+5. TinyImageNet
+
 For the statistical analysis using Nemenyi-post hoc test, you can simply run the `stats_analysis.py` file to automatically generate the critical distance plot. The `Statistical_Res_Acc.csv` and `Statistical_Res_F1.csv` are provided to make sure the CD diagram can be generated. 
 
 ## Results
