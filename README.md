@@ -25,7 +25,7 @@ pip install -r requirements.txt
 12. wilds==2.0.0
 
 ## Example running experiments
-For the pytorch implementation, use the google colab with A100 GPU instance by running the `calfd_pytorch_demo.py` file.
+For the pytorch implementation, use the google colab with A100 GPU instance by running the `calfd_pytorch_demo.py` file. User can upload it as the notebook and run the code in google colab. 
 
 User can change the variable `ALStrategy` to change the AL method. The label budget can be adjusted by adjusting the parameters below:
 
@@ -35,6 +35,7 @@ User can change the variable `ALStrategy` to change the AL method. The label bud
 
 `NUM_ROUNDS`: we set it as 1 to conduct single round query.
 
+For the statistical analysis using Nemenyi-post hoc test, you can simply run the `stats_analysis.py` file to automatically generate the critical distance plot. The `Statistical_Res_Acc.csv` and `Statistical_Res_F1.csv` are provided to make sure the CD diagram can be generated. 
 
 ## Results
 
@@ -75,4 +76,4 @@ Our model achieves the following performance on :
 
 ## Contributing
 
->📋  MIT License
+>📋  CC-BY-4.0
