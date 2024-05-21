@@ -1,5 +1,5 @@
 import sys
-sys.path.append("/content/CALFD/deepALplus-master")
+sys.path.append("/deepALplus-master")
 import argparse
 import numpy as np
 import warnings
