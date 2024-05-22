@@ -4,6 +4,8 @@ This repository is the official implementation of [Deep Active Learning using Cl
 
 ## Requirements
 
+Install Python 3.10 first to set up the environment.
+
 To install requirements:
 
 ```setup
