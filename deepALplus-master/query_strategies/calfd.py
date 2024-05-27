@@ -95,8 +95,8 @@ class CALFD(Strategy):
       d2 = []
       inter_dist = squareform(pdist(cluster_centers))
       center_priority = []
-      for i in range(np.shape(cluster_centers)[0]):
-        center_priority.append(np.sum(1+np.exp(-inter_dist[i,:])))
+      for i_2 in range(np.shape(cluster_centers)[0]):
+        center_priority.append(np.sum(1+np.exp(-inter_dist[i_2,:])))
       center_priority = np.array(center_priority)
       global_center = cluster_centers[np.argmax(center_priority)]
       temp_neigh1 = global_center
