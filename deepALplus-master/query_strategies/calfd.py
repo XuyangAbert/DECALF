@@ -85,7 +85,7 @@ class CALFD(Strategy):
         knei_dist.append(np.mean(curr_dist[j, :num_nei]))
       sortIndex1 = np.argsort(query_priority)
       sortIndex1 = sortIndex1[::-1]
-      dth = 0.1* np.mean(knei_dist)
+      dth = 0.05* np.mean(knei_dist)
       query_priority = np.array(query_priority)
       fet1 = self.diversityfetch1(sortIndex1[:round(len(query_priority) / 2)],
                                   curr_cluster,
@@ -113,8 +113,6 @@ class CALFD(Strategy):
         candidate_d1 = np.linalg.norm(samples[curr_cluster[candidate_fet2[ii]], :] - temp_neigh1)
         candidate_d2 = np.linalg.norm(samples[curr_cluster[candidate_fet2[ii]], :] - temp_neigh1)
         sum_dist.append(1 + 1 / (1 + candidate_d1 + candidate_d2))
-      sortIndex3 = np.argsort(sum_dist)
-      sortIndex3 = sortIndex3[::-1]
       sum_dist = np.array(sum_dist)
       fet2 = candidate_fet2[np.argsort(sum_dist)[-round(num_queries * 0.5):]]
       # fet2 = self.diversityfetch2(candidate_fet2, curr_cluster,
