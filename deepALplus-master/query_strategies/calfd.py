@@ -117,8 +117,8 @@ class CALFD(Strategy):
       sum_dist = np.array(sum_dist)
       fet2 = candidate_fet2[np.argsort(sum_dist)[-round(num_queries * 0.5):]]
       # fet2 = self.diversityfetch2(candidate_fet2, curr_cluster,
-                                  sum_dist, curr_dist, dth,
-                                  round(num_queries * 0.5))
+                                  # sum_dist, curr_dist, dth,
+                                  # round(num_queries * 0.5))
       query_idx = np.append(query_idx, fet1)
       query_idx = np.append(query_idx, fet2)
     return query_idx
