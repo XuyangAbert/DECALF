@@ -108,6 +108,7 @@ class CALFD(Strategy):
         d2.append(temp_ratio1)
       sortIndex2 = np.argsort(d2)
       candidate_fet2 = fil_index[sortIndex2[:int(round(num_queries * 1))]] # 0.8
+      candidate_fet2 = fil_index
       sum_dist = []
       for ii in range(len(candidate_fet2)):
         candidate_d1 = np.linalg.norm(samples[curr_cluster[candidate_fet2[ii]], :] - temp_neigh1)
