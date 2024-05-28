@@ -87,10 +87,11 @@ class CALFD(Strategy):
       sortIndex1 = sortIndex1[::-1]
       dth = 0.001* np.mean(knei_dist)
       query_priority = np.array(query_priority)
-      fet1 = self.diversityfetch1(sortIndex1[:round(len(query_priority) / 2)],
-                                  curr_cluster,
-                                  query_priority[sortIndex1[:round(len(query_priority) / 2)]],
-                                  curr_dist, dth, round(num_queries * 0.5))
+      fet1 = sortIndex1[:round(num_queries * 0.5)]
+      # fet1 = self.diversityfetch1(sortIndex1[:round(len(query_priority) / 2)],
+      #                             curr_cluster,
+      #                             query_priority[sortIndex1[:round(len(query_priority) / 2)]],
+      #                             curr_dist, dth, round(num_queries * 0.5))
       fil_index = sortIndex1[-int(round(len(query_priority) / 2)):]
       d2 = []
       inter_dist = squareform(pdist(cluster_centers))
