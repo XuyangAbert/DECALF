@@ -121,7 +121,7 @@ class TypiClust(Strategy):
         remainSet = np.array(sorted(list(set(self.uSet) - set(activeSet))))
 
         print(f'Finished the selection of {len(activeSet)} samples.')
-        print(f'Active set is {activeSet}')
+        # print(f'Active set is {activeSet}')
         return activeSet, remainSet
     def query(self, label_budget):
       labeled_idxs, labeled_data = self.dataset.get_labeled_data()
