@@ -45,11 +45,10 @@ class TypiClust(Strategy):
     MIN_CLUSTER_SIZE = 5
     MAX_NUM_CLUSTERS = 500
     K_NN = 20
-    def __init__(self, dataset, net, args_input, args_task, lSet, uSet, is_scan=False):
+    def __init__(self, dataset, net, args_input, args_task, is_scan=False):
       self.features = None
       self.clusters = None
-      self.lSet = lSet
-      self.uSet = uSet
+      
       
       super(TypiClust, self).__init__(dataset, net, args_input, args_task)
 
@@ -123,6 +122,8 @@ class TypiClust(Strategy):
         return activeSet, remainSet
     def query(self, label_budget):
       unlabeled_idxs, unlabeled_data = self.dataset.get_unlabeled_data()
+      self.lSet = []
+      self.uSet = unlabeled_idxs
       embedding_unlabeled = self.get_embeddings(unlabeled_data).numpy()
       query_idx, remaining_idx = self.select_samples(self, embedding_unlabeled)
       return query_idx
