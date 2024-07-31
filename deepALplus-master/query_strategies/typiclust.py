@@ -128,8 +128,8 @@ class TypiClust(Strategy):
       self.lSet = labeled_idxs
       self.uSet = unlabeled_idxs
       self.budgetSize = label_budget
-      embedding_unlabeled = self.get_embeddings(unlabeled_data).numpy()
-      embedding_labeled = self.get_embeddings(labeled_data).numpy()
+      # embedding_unlabeled = self.get_embeddings(unlabeled_data).numpy()
+      # embedding_labeled = self.get_embeddings(labeled_data).numpy()
       # samples = np.concatenate([embedding_labeled, embedding_unlabeled])
       idxs, samples = self.dataset.get_train_data()
       embedding_samples = self.get_embeddings(samples).numpy()
