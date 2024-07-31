@@ -84,7 +84,7 @@ class TypiClust(Strategy):
         self.features = samples
         self.init_features_and_clusters()
         # using only labeled+unlabeled indices, without validation set.
-        relevant_indices = np.concatenate([self.lSet, self.uSet]).astype(int)
+        relevant_indices = np.concatenate([self.lSet, self.uSet]).astype(int) - 1
         features = self.features[relevant_indices]
         labels = np.copy(self.clusters[relevant_indices])
         existing_indices = np.arange(len(self.lSet))
