@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+from tqdm import tqdm
 import faiss
 from sklearn.cluster import MiniBatchKMeans, KMeans
 from .strategy import Strategy
@@ -85,8 +86,8 @@ class TypiClust(Strategy):
         self.init_features_and_clusters()
         # using only labeled+unlabeled indices, without validation set.
         relevant_indices = np.concatenate([self.lSet, self.uSet]).astype(int)
-        print(np.max(relevant_indices))
-        print(np.shape(self.features))
+        # print(np.max(relevant_indices))
+        # print(np.shape(self.features))
         features = self.features[relevant_indices]
         labels = np.copy(self.clusters[relevant_indices])
         existing_indices = np.arange(len(self.lSet))
@@ -103,7 +104,7 @@ class TypiClust(Strategy):
 
         selected = []
 
-        for i in range(self.budgetSize):
+        for i in tqdm(range(self.budgetSize)):
             cluster = clusters_df.iloc[i % len(clusters_df)].cluster_id
             indices = (labels == cluster).nonzero()[0]
             rel_feats = features[indices]
@@ -133,7 +134,7 @@ class TypiClust(Strategy):
       # samples = np.concatenate([embedding_labeled, embedding_unlabeled])
       idxs, samples = self.dataset.get_train_data()
       embedding_samples = self.get_embeddings(samples).numpy()
-      print(embedding_samples.shape)
+      # print(embedding_samples.shape)
       query_idx, remaining_idx = self.select_samples(embedding_samples)
       return query_idx
       
