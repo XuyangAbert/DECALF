@@ -63,7 +63,7 @@ class TypiClust(Strategy):
     #     self.budgetSize = budgetSize
     #     self.init_features_and_clusters(is_scan)
 
-    def init_features_and_clusters(self, is_scan):
+    def init_features_and_clusters(self):
         num_clusters = min(len(self.lSet) + self.budgetSize, self.MAX_NUM_CLUSTERS)
         print(f'Clustering into {num_clusters} clustering. Scan clustering: {is_scan}')
         # if is_scan:
@@ -82,7 +82,7 @@ class TypiClust(Strategy):
 
     def select_samples(self, samples):
         self.features = samples
-        self.init_features_and_clusters(is_scan)
+        self.init_features_and_clusters()
         # using only labeled+unlabeled indices, without validation set.
         relevant_indices = np.concatenate([self.lSet, self.uSet]).astype(int)
         features = self.features[relevant_indices]
