@@ -9,7 +9,7 @@ from query_strategies import RandomSampling, LeastConfidence, MarginSampling, En
 								LeastConfidenceDropout, MarginSamplingDropout, EntropySamplingDropout, \
 								KMeansSampling, KMeansSamplingGPU, KCenterGreedy, KCenterGreedyPCA, BALDDropout,  \
 								AdversarialBIM, AdversarialDeepFool, VarRatio, MeanSTD, BadgeSampling, CEALSampling, \
-								LossPredictionLoss, VAAL, WAAL, CALFD
+								LossPredictionLoss, VAAL, WAAL, CALFD, TypiClust
 from parameters import *
 from torchvision import transforms
 import sys
