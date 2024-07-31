@@ -130,7 +130,10 @@ class TypiClust(Strategy):
       self.budgetSize = label_budget
       embedding_unlabeled = self.get_embeddings(unlabeled_data).numpy()
       embedding_labeled = self.get_embeddings(labeled_data).numpy()
-      # samples = np.concatenate([embedding_labeled, self.uSet])
-      query_idx, remaining_idx = self.select_samples(embedding_unlabeled)
+      # samples = np.concatenate([embedding_labeled, embedding_unlabeled])
+      idxs, samples = self.dataset.get_train_data()
+      embedding_samples = self.get_embeddings(samples).numpy()
+      print(embedding_samples.shape)
+      query_idx, remaining_idx = self.select_samples(embedding_samples)
       return query_idx
       
