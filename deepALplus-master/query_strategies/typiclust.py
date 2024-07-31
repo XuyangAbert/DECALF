@@ -85,8 +85,7 @@ class TypiClust(Strategy):
         self.init_features_and_clusters()
         # using only labeled+unlabeled indices, without validation set.
         relevant_indices = np.concatenate([self.lSet, self.uSet]).astype(int)
-        relevant_indices -= 1
-        print(np.max(relevant_indices))
+        # print(np.max(relevant_indices))
         features = self.features[relevant_indices]
         labels = np.copy(self.clusters[relevant_indices])
         existing_indices = np.arange(len(self.lSet))
@@ -123,8 +122,9 @@ class TypiClust(Strategy):
         print(f'Active set is {activeSet}')
         return activeSet, remainSet
     def query(self, label_budget):
+      labeled_idxs, labeled_data = self.dataset.get_labeled_data()
       unlabeled_idxs, unlabeled_data = self.dataset.get_unlabeled_data()
-      self.lSet = []
+      self.lSet = labeled_idxs
       self.uSet = unlabeled_idxs
       self.budgetSize = label_budget
       embedding_unlabeled = self.get_embeddings(unlabeled_data).numpy()
