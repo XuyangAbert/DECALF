@@ -125,6 +125,6 @@ class TypiClust(Strategy):
       self.lSet = []
       self.uSet = unlabeled_idxs
       embedding_unlabeled = self.get_embeddings(unlabeled_data).numpy()
-      query_idx, remaining_idx = self.select_samples(self, embedding_unlabeled)
+      query_idx, remaining_idx = self.select_samples(embedding_unlabeled)
       return query_idx
       
