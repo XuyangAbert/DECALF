@@ -65,7 +65,7 @@ class TypiClust(Strategy):
 
     def init_features_and_clusters(self):
         num_clusters = min(len(self.lSet) + self.budgetSize, self.MAX_NUM_CLUSTERS)
-        print(f'Clustering into {num_clusters} clustering. Scan clustering: {is_scan}')
+        # print(f'Clustering into {num_clusters} clustering. Scan clustering: {is_scan}')
         # if is_scan:
         #     fname_dict = {'CIFAR10': f'../../scan/results/cifar-10/scan/features_seed{self.seed}_clusters{num_clusters}.npy',
         #                   'CIFAR100': f'../../scan/results/cifar-100/scan/features_seed{self.seed}_clusters{num_clusters}.npy',
