@@ -5,9 +5,6 @@ import .strategy import Strategy
 
 class ProbCover(Strategy):
     def __init__(self, dataset, net, args_input, args_task):
-        self.lSet = lSet
-        self.uSet = uSet
-        self.delta = delta
         self.relevant_indices = np.concatenate([self.lSet, self.uSet]).astype(int)
         super(ProbCover, self).__init__(dataset, net, args_input, args_task)
     # def __init__(self, cfg, lSet, uSet, budgetSize, delta):
@@ -93,6 +90,9 @@ class ProbCover(Strategy):
         print(f'Active set is {activeSet}')
         return activeSet, remainSet
     def query(self,label_budget):
+        self.lSet = []
+        self.uSet = unlabeled_idxs
+        self.delta = 0.05
         unlabeled_idxs, unlabeled_data = self.dataset.get_unlabeled_data()
         embedding_unlabeled = self.get_embeddings(unlabeled_data).numpy()
         self.all_features = embedding_unlabeled
