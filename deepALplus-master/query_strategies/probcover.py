@@ -5,7 +5,7 @@ import .strategy import Strategy
 
 class ProbCover(Strategy):
     def __init__(self, dataset, net, args_input, args_task):
-        self.relevant_indices = np.concatenate([self.lSet, self.uSet]).astype(int)
+        # self.relevant_indices = np.concatenate([self.lSet, self.uSet]).astype(int)
         super(ProbCover, self).__init__(dataset, net, args_input, args_task)
     # def __init__(self, cfg, lSet, uSet, budgetSize, delta):
     #     self.cfg = cfg
@@ -90,13 +90,15 @@ class ProbCover(Strategy):
         print(f'Active set is {activeSet}')
         return activeSet, remainSet
     def query(self,label_budget):
-        self.lSet = []
-        self.uSet = unlabeled_idxs
-        self.delta = 0.05
+        labeled_idxs, labeled_data = self.dataset.get_labeled_data()
         unlabeled_idxs, unlabeled_data = self.dataset.get_unlabeled_data()
-        embedding_unlabeled = self.get_embeddings(unlabeled_data).numpy()
-        self.all_features = embedding_unlabeled
+        self.lSet = labeled_idxs
+        self.uSet = unlabeled_idxs
         self.budgetSize = label_budget
+        self.delta = 0.05
+        idxs, samples = self.dataset.get_train_data()
+        embedding_samples = self.get_embeddings(samples).numpy()
+        self.all_features = embedding_samples
         self.rel_features = self.all_features[self.relevant_indices]
         self.graph_df = self.construct_graph()
         query_idx, remain_idx = self.select_samples()
