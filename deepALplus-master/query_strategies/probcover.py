@@ -1,7 +1,8 @@
 import numpy as np
 import pandas as pd
 import torch
-import .strategy import Strategy
+from .strategy import Strategy
+# from .strategy import Strategy
 
 class ProbCover(Strategy):
     def __init__(self, dataset, net, args_input, args_task):
