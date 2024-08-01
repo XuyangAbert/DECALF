@@ -100,6 +100,7 @@ class ProbCover(Strategy):
         idxs, samples = self.dataset.get_train_data()
         embedding_samples = self.get_embeddings(samples).numpy()
         self.all_features = embedding_samples
+        self.relevant_indices = np.concatenate([self.lSet, self.uSet]).astype(int)
         self.rel_features = self.all_features[self.relevant_indices]
         self.graph_df = self.construct_graph()
         query_idx, remain_idx = self.select_samples()
