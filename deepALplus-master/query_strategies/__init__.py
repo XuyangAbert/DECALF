@@ -22,3 +22,4 @@ from .loss_prediction import LossPredictionLoss
 from .vaal import VAAL
 from .waal import WAAL
 from .typiclust import TypiClust
+from .probcover import ProbCover
