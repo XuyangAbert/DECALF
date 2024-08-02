@@ -71,7 +71,7 @@ class ProbCover(Strategy):
             coverage = len(covered_samples) / len(self.relevant_indices)
             # selecting the sample with the highest degree
             degrees = np.bincount(cur_df.x, minlength=len(self.relevant_indices))
-            print(f'Iteration is {i}.\tGraph has {len(cur_df)} edges.\tMax degree is {degrees.max()}.\tCoverage is {coverage:.3f}')
+            # print(f'Iteration is {i}.\tGraph has {len(cur_df)} edges.\tMax degree is {degrees.max()}.\tCoverage is {coverage:.3f}')
             cur = degrees.argmax()
             # cur = np.random.choice(degrees.argsort()[::-1][:5]) # the paper randomizes selection
 
