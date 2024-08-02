@@ -105,15 +105,19 @@ class Net:
         return embeddings
      
     def get_raw_features(self, data):
-	    embeddings = []
+	    i = 0
 	    loader = DataLoader(data, shuffle=False, **self.params['loader_te_args'])
 	    for x, y, idxs in loader:
 		    # x, y = x.to(self.device), y.to(self.device)
 		    # print(x.shape)
 		    x = np.reshape(x, (x.shape[0], x.shape[1] * x.shape[2] * x.shape[3]))
-		    embeddings.append(x)
-	    embeddings_array = np.array(embeddings)
-	    print(embeddings_array.shape)
+		    if i == 0:
+			    embeddings = x
+		    else:
+			    embeddings = np.concatenate([embeddings, x])
+		    # embeddings.append(x)
+	    # embeddings_array = np.array(embeddings)
+	    print(embeddings.shape)
 	    return embeddings
         # with torch.no_grad():
         #     for x, y, idxs in loader:
