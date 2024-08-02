@@ -213,7 +213,81 @@ def get_TinyImageNet(handler, args_task):
     X_te = np.array(X_te)
     Y_te = torch.from_numpy(np.array(Y_te)).long()
     return Data(X_tr, Y_tr, X_te, Y_te, handler, args_task)
+def get_ImageNet100(handler, args_task):
+    import cv2
+    # # URL to the Tiny ImageNet dataset (you might need to update this URL)
+    # url = "http://cs231n.stanford.edu/tiny-imagenet-200.zip"
+    
+    # # Directory where the dataset will be extracted
+    # extract_to = "./data/TinyImageNet"
+    # os.makedirs(extract_to, exist_ok=True)
+    # download_and_unzip(url, extract_to)
+    
+    #download data from http://cs231n.stanford.edu/tiny-imagenet-200.zip and unzip it into ./data/TinyImageNet
+    # deal with training set
+    Y_train_t = []
+    train_img_names = []
+    train_imgs = []
+    
+    with open('./data/TinyImageNet/tiny-imagenet-200/wnids.txt') as wnid:
+        for line in wnid:
+            Y_train_t.append(line.strip('\n'))
+    for Y in Y_train_t:
+        Y_path = './data/TinyImageNet/tiny-imagenet-200/train/' + Y + '/' + Y + '_boxes.txt'
+        train_img_name = []
+        with open(Y_path) as Y_p:
+            for line in Y_p:
+                train_img_name.append(line.strip('\n').split('\t')[0])
+        train_img_names.append(train_img_name)
+    train_labels = np.arange(200)
+    idx = 0
+    for Y in Y_train_t:
+        train_img = []
+        for img_name in train_img_names[idx]:
+            img_path = os.path.join('./data/TinyImageNet/tiny-imagenet-200/train/', Y, 'images', img_name)
+            train_img.append(cv2.imread(img_path))
+        train_imgs.append(train_img)
+        idx = idx + 1
+    train_imgs = np.array(train_imgs)
+    train_imgs = train_imgs.reshape(-1, 64, 64, 3)
+    X_tr = []
+    Y_tr = []
+    for i in range(train_imgs.shape[0]):
+        Y_tr.append(i//500)
+        X_tr.append(train_imgs[i])
+    #X_tr = torch.from_numpy(np.array(X_tr))
+    X_tr = np.array(X_tr)
+    Y_tr = torch.from_numpy(np.array(Y_tr)).long()
 
+    #deal with testing (val) set
+    Y_test_t = []
+    Y_test = []
+    test_img_names = []
+    test_imgs = []
+    with open('./data/TinyImageNet/tiny-imagenet-200/val/val_annotations.txt') as val:
+        for line in val:
+            test_img_names.append(line.strip('\n').split('\t')[0])
+            Y_test_t.append(line.strip('\n').split('\t')[1])
+    for i in range(len(Y_test_t)):
+        for i_t in range(len(Y_train_t)):
+            if Y_test_t[i] == Y_train_t[i_t]:
+                Y_test.append(i_t)
+    test_labels = np.array(Y_test)
+    test_imgs = []
+    for img_name in test_img_names:
+        img_path = os.path.join('./data/TinyImageNet/tiny-imagenet-200/val/images', img_name)
+        test_imgs.append(cv2.imread(img_path))
+    test_imgs = np.array(test_imgs)
+    X_te = []
+    Y_te = []
+
+    for i in range(test_imgs.shape[0]):
+        X_te.append(test_imgs[i])
+        Y_te.append(Y_test[i])
+    #X_te = torch.from_numpy(np.array(X_te))
+    X_te = np.array(X_te)
+    Y_te = torch.from_numpy(np.array(Y_te)).long()
+    return Data(X_tr, Y_tr, X_te, Y_te, handler, args_task)
 def get_openml(handler, args_task, selection = 6):
     import openml
     from sklearn.preprocessing import LabelEncoder
