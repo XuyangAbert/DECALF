@@ -103,6 +103,27 @@ class Net:
                 out, e1 = self.clf(x)
                 embeddings[idxs] = e1.cpu()
         return embeddings
+     
+    def get_raw_features(self, data):
+        # self.clf.eval()
+        # embeddings = torch.zeros([len(data), self.clf.get_embedding_dim()])
+	# dim = data.shape[1] * data.shape[2]
+	# embeddings = torch.zeros([len(data), self.clf.get_embedding_dim()])
+	embeddings = []
+        loader = DataLoader(data, shuffle=False, **self.params['loader_te_args'])
+	for x, y, idxs in loader:
+		x, y = x.to(self.device), y.to(self.device)
+		print(x.shape)
+		embeddings.append(x)
+                # out, e1 = self.clf(x)
+                # embeddings[idxs] = e1.cpu()
+        # with torch.no_grad():
+        #     for x, y, idxs in loader:
+        #         x, y = x.to(self.device), y.to(self.device)
+        #         out, e1 = self.clf(x)
+        #         embeddings[idxs] = e1.cpu()
+	embeddings_array = np.array(embeddings)
+        return embeddings
     
     def get_grad_embeddings(self, data):
         self.clf.eval()
