@@ -109,6 +109,7 @@ class Net:
 	    loader = DataLoader(data, shuffle=False, **self.params['loader_te_args'])
 	    for x, y, idxs in loader:
 		    # x, y = x.to(self.device), y.to(self.device)
+		    print(x.shape)
 		    x = np.reshape(x, (x.shape[0], x.shape[1] * x.shape[2]))
 		    print(x.shape)
 		    embeddings.append(x)
