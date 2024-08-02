@@ -112,9 +112,9 @@ class Net:
 		    # print(x.shape)
 		    x = np.reshape(x, (x.shape[0], x.shape[1] * x.shape[2] * x.shape[3]))
 		    if i == 0:
-			    embeddings = x
+			    embeddings = x.numpy()
 		    else:
-			    embeddings = np.concatenate([embeddings, x])
+			    embeddings = np.concatenate([embeddings, x.numpy()])
 		    # embeddings.append(x)
 	    # embeddings_array = np.array(embeddings)
 	    print(embeddings.shape)
