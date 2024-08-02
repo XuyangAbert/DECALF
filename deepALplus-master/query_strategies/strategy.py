@@ -62,6 +62,10 @@ class Strategy:
         embeddings = self.net.get_embeddings(data)
         return embeddings
     
+    def get_raw_embeddings(self, data):
+        embeddings = self.net.get_raw_features(data)
+        return embeddings
+    
     def get_grad_embeddings(self, data):
         embeddings = self.net.get_grad_embeddings(data)
         return embeddings
