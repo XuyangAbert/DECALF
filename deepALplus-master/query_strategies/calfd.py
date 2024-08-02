@@ -129,7 +129,7 @@ class CALFD(Strategy):
     unlabeled_idxs, unlabeled_data = self.dataset.get_unlabeled_data()
     embedding_unlabeled = self.get_embeddings(unlabeled_data).numpy()
     unlabeled_raw = self.get_raw_embeddings(unlabeled_data)
-    print(np.shape(unlabeled_raw))
+    # print(np.shape(unlabeled_raw))
     clustering_model = fps_analysis()
     cluster_centers, cluster_idx, cluster_dist = clustering_model.predict(embedding_unlabeled)
     print("fps-clustering stage finish!")
