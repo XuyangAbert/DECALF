@@ -82,11 +82,12 @@ class CALFD(Strategy):
       temp_neigh2 = cluster_centers[np.argsort(temp_interdist)[1], :]
       temp_neigh3 = cluster_centers[np.argsort(temp_interdist)[2], :]
       for j in range(len(curr_cluster)):
-        query_priority.append(1 + exp(-np.linalg.norm(samples[curr_cluster[j], :] - cluster_centers[i, :])))
+        # query_priority.append(1 + exp(-np.linalg.norm(samples[curr_cluster[j], :] - cluster_centers[i, :])))
+        query_priority.append(1 + 1/(np.linalg.norm(samples[curr_cluster[j], :] - cluster_centers[i, :])))
         knei_dist.append(np.mean(curr_dist[j, :num_nei]))
       sortIndex1 = np.argsort(query_priority)
       sortIndex1 = sortIndex1[::-1]
-      dth = 0.001* np.mean(knei_dist)
+      dth = 0.0001* np.mean(knei_dist)
       query_priority = np.array(query_priority)
       # fet1 = sortIndex1[:round(num_queries * 0.5)]
       fet1 = self.diversityfetch1(sortIndex1[:round(len(query_priority) / 2)],
@@ -131,7 +132,7 @@ class CALFD(Strategy):
       
       query_idx = np.append(query_idx, fet1)
       query_idx = np.append(query_idx, fet2)
-      print('No of unique idxs:', len(np.unique(query_idx)))
+    print('No of unique idxs:', len(np.unique(query_idx)))
     return query_idx
 
   def query(self, label_budget):
