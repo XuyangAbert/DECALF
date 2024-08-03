@@ -101,13 +101,15 @@ class CALFD(Strategy):
         center_priority.append(np.sum(1+np.exp(-inter_dist[i_2,:])))
       center_priority = np.array(center_priority)
       global_center = cluster_centers[np.argmax(center_priority)]
-      # temp_neigh1 = global_center
-      # temp_neigh2 = cluster_centers[np.argsort(temp_interdist)[1],:]
+      temp_neigh1 = global_center
+      temp_neigh2 = cluster_centers[np.argsort(temp_interdist)[1],:]
       for k in range(len(fil_index)):
         temp_d1 = np.linalg.norm(samples[curr_cluster[fil_index[k]], :] - temp_neigh1)
         temp_d2 = np.linalg.norm(samples[curr_cluster[fil_index[k]], :] - temp_neigh2)
-        temp_ratio1 = max(temp_d1, temp_d2) / min(temp_d1, temp_d2)
-        d2.append(temp_ratio1)
+        d2.append(np.exp(-abs((temp_d1 + temp_d2)/2 - np.linalg.norm(temp_neigh1 - temp_neigh2)/2)))
+        # temp_d3 = np.linalg.norm(samples[curr_cluster[fil_index[k]], :] - temp_neigh3)
+        # temp_ratio1 = max(temp_d1, temp_d2) / min(temp_d1, temp_d2)
+        # d2.append(temp_ratio1)
       d2 = np.array(d2)
       fet2 = self.diversityfetch2(fil_index, curr_cluster,
                                   d2, curr_dist, dth,
@@ -126,8 +128,10 @@ class CALFD(Strategy):
       # fet2 = self.diversityfetch2(candidate_fet2, curr_cluster,
       #                             sum_dist, curr_dist, dth,
       #                             round(num_queries * 0.5))
+      
       query_idx = np.append(query_idx, fet1)
       query_idx = np.append(query_idx, fet2)
+      print('No of unique idxs:', len(np.unique(query_idx)))
     return query_idx
 
   def query(self, label_budget):
