@@ -138,5 +138,6 @@ class TypiClust(Strategy):
       embedding_samples = self.get_embeddings(samples).numpy()
       # print(embedding_samples.shape)
       query_idx, remaining_idx = self.select_samples(embedding_samples)
+      print("# of queried idxes: ", len(np.unique(query_idx)))
       return query_idx
       
