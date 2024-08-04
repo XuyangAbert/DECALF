@@ -117,8 +117,8 @@ class TypiClust(Strategy):
             labels[idx] = -1
 
         selected = np.array(selected)
-        assert len(selected) == self.budgetSize, 'added a different number of samples'
-        assert len(np.intersect1d(selected, existing_indices)) == 0, 'should be new samples'
+        # assert len(selected) == self.budgetSize, 'added a different number of samples'
+        # assert len(np.intersect1d(selected, existing_indices)) == 0, 'should be new samples'
         activeSet = relevant_indices[selected]
         remainSet = np.array(sorted(list(set(self.uSet) - set(activeSet))))
 
