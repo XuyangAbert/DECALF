@@ -110,6 +110,8 @@ class TypiClust(Strategy):
             rel_feats = features[indices]
             # in case we have too small cluster, calculate density among half of the cluster
             typicality = calculate_typicality(rel_feats, min(self.K_NN, len(indices) // 2))
+            if len(typicality) == 0:
+                continue
             idx = indices[typicality.argmax()]
             selected.append(idx)
             labels[idx] = -1
