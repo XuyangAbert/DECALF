@@ -141,10 +141,17 @@ class CALFD(Strategy):
     unlabeled_idxs, unlabeled_data = self.dataset.get_unlabeled_data()
     embedding_unlabeled = self.get_embeddings(unlabeled_data).numpy()
     # unlabeled_raw = self.get_raw_embeddings(unlabeled_data)
-    # print(np.shape(unlabeled_raw))
-    clustering_model = fps_analysis()
-    cluster_centers, cluster_idx, cluster_dist = clustering_model.predict(embedding_unlabeled)
-    print("fps-clustering stage finish!")
+    num_clusters = 500
+    if num_clusters <= 50:
+        km = KMeans(n_clusters=num_clusters)
+        km.fit_predict(features)
+    else:
+        km = MiniBatchKMeans(n_clusters=num_clusters, batch_size=5000)
+        km.fit_predict(features)
+    cluster_centers, cluster_idx = km.cluster_centers_, km.labels_
+    # clustering_model = fps_analysis()
+    # cluster_centers, cluster_idx, cluster_dist = clustering_model.predict(embedding_unlabeled)
+    print("clustering stage finish!")
     query_idx = self.active_query(embedding_unlabeled, cluster_centers, cluster_idx, label_budget)
     query_idx = query_idx.astype(int)
     return unlabeled_idxs[query_idx]
