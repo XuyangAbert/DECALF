@@ -83,6 +83,7 @@ class CALFD(Strategy):
       temp_neigh3 = cluster_centers[np.argsort(temp_interdist)[2], :]
       for j in range(len(curr_cluster)):
         query_priority.append(1 + exp(-np.linalg.norm(samples[curr_cluster[j], :] - cluster_centers[i, :])**2))
+        # print(np.sort(curr_dist[j, :]))
         # query_priority.append(1 + 1/(np.linalg.norm(samples[curr_cluster[j], :] - cluster_centers[i, :])))
         knei_dist.append(np.mean(np.sort(curr_dist[j, :])[1:num_nei+1]))
       sortIndex1 = np.argsort(query_priority)
@@ -94,6 +95,7 @@ class CALFD(Strategy):
                                   curr_cluster,
                                   query_priority[sortIndex1[:round(len(query_priority) / 2)]],
                                   curr_dist, dth, round(num_queries * 0.5))
+      print("No. of Unique Query idx from center regions:", len(np.unique(fet1)))
       fil_index = sortIndex1[-int(round(len(query_priority) / 2)):]
       d2 = []
       inter_dist = squareform(pdist(cluster_centers))
@@ -107,16 +109,17 @@ class CALFD(Strategy):
       for k in range(len(fil_index)):
         temp_d1 = np.linalg.norm(samples[curr_cluster[fil_index[k]], :] - temp_neigh1)
         temp_d2 = np.linalg.norm(samples[curr_cluster[fil_index[k]], :] - temp_neigh2)
-        d2.append(np.exp(-abs((temp_d1 + temp_d2)/2 - np.linalg.norm(temp_neigh1 - temp_neigh2)/2)**2))
+        d2.append(1 + exp(-abs((temp_d1 + temp_d2)/2 - np.linalg.norm(temp_neigh1 - temp_neigh2)/2)))
         # temp_d3 = np.linalg.norm(samples[curr_cluster[fil_index[k]], :] - temp_neigh3)
         # temp_ratio1 = max(temp_d1, temp_d2) / min(temp_d1, temp_d2)
         # d2.append(temp_ratio1)
       d2 = np.array(d2)
-      sortIndex2 = np.argsort(d2)
-      fet2 = fil_index[sortIndex2[-round(num_queries * 0.5):]]
+      # sortIndex2 = np.argsort(d2)
+      # fet2 = fil_index[sortIndex2[-round(num_queries * 0.5):]]
       fet2 = self.diversityfetch2(fil_index, curr_cluster,
                                   d2, curr_dist, dth,
                                   round(num_queries * 0.5))
+      print("No. of Unique Query idx from border regions:", len(np.unique(fet2)))
       # sortIndex2 = np.argsort(d2)
       # candidate_fet2 = fil_index[sortIndex2[:int(round(num_queries * 1))]] # 0.8
       # candidate_fet2 = fil_index
