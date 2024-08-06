@@ -10,6 +10,7 @@ from math import exp
 import numpy as np
 from .strategy import Strategy
 from .fps_clustering import fps_analysis
+from sklearn.cluster import MiniBatchKMeans, KMeans
 
 from scipy.spatial.distance import pdist,squareform
 import numpy as np
