@@ -73,7 +73,6 @@ class CALFD(Strategy):
       curr_cluster = np.where(cluster_idx == i)[0]
       curr_dist = squareform(pdist(samples[curr_cluster]))
       num_queries = round(label_budget * len(curr_dist) / np.shape(samples)[0])
-      num_nei = round(len(curr_cluster) ** 0.5)
       num_nei = 3
       knei_dist, query_priority = [], []
       temp_interdist = dist_cluster[i, :]
@@ -88,7 +87,7 @@ class CALFD(Strategy):
         knei_dist.append(np.mean(curr_dist[j, :num_nei]))
       sortIndex1 = np.argsort(query_priority)
       sortIndex1 = sortIndex1[::-1]
-      dth = 0.0001* np.mean(knei_dist)
+      dth = 0.01* np.min(knei_dist)
       query_priority = np.array(query_priority)
       # fet1 = sortIndex1[:round(num_queries * 0.5)]
       fet1 = self.diversityfetch1(sortIndex1[:round(len(query_priority) / 2)],
