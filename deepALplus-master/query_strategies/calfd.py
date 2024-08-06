@@ -111,7 +111,7 @@ class CALFD(Strategy):
         # temp_d3 = np.linalg.norm(samples[curr_cluster[fil_index[k]], :] - temp_neigh3)
         # temp_ratio1 = max(temp_d1, temp_d2) / min(temp_d1, temp_d2)
         # d2.append(temp_ratio1)
-      # d2 = np.array(d2)
+      d2 = np.array(d2)
       sortIndex2 = np.argsort(d2)
       fet2 = fil_index[sortIndex2[-round(num_queries * 0.5):]]
       fet2 = self.diversityfetch2(fil_index, curr_cluster,
