@@ -107,7 +107,7 @@ class CALFD(Strategy):
       for k in range(len(fil_index)):
         temp_d1 = np.linalg.norm(samples[curr_cluster[fil_index[k]], :] - temp_neigh1)
         temp_d2 = np.linalg.norm(samples[curr_cluster[fil_index[k]], :] - temp_neigh2)
-        d2.append(np.exp(-abs((temp_d1 + temp_d2)/2 - np.linalg.norm(temp_neigh1 - temp_neigh2)/2)))
+        d2.append(np.exp(-abs((temp_d1 + temp_d2)/2 - np.linalg.norm(temp_neigh1 - temp_neigh2)/2)**2))
         # temp_d3 = np.linalg.norm(samples[curr_cluster[fil_index[k]], :] - temp_neigh3)
         # temp_ratio1 = max(temp_d1, temp_d2) / min(temp_d1, temp_d2)
         # d2.append(temp_ratio1)
