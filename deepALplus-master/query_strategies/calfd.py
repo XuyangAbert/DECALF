@@ -145,10 +145,10 @@ class CALFD(Strategy):
     num_clusters = 500
     if num_clusters <= 50:
         km = KMeans(n_clusters=num_clusters)
-        km.fit_predict(features)
+        km.fit_predict(embedding_unlabeled)
     else:
         km = MiniBatchKMeans(n_clusters=num_clusters, batch_size=5000)
-        km.fit_predict(features)
+        km.fit_predict(embedding_unlabeled)
     cluster_centers, cluster_idx = km.cluster_centers_, km.labels_
     # clustering_model = fps_analysis()
     # cluster_centers, cluster_idx, cluster_dist = clustering_model.predict(embedding_unlabeled)
