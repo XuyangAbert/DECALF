@@ -138,17 +138,17 @@ class DECALF(Strategy):
   def query(self, label_budget):
     unlabeled_idxs, unlabeled_data = self.dataset.get_unlabeled_data()
     embedding_unlabeled = self.get_embeddings(unlabeled_data).numpy()
-    unlabeled_raw = self.get_raw_embeddings(unlabeled_data)
-    num_clusters = 60
-    if num_clusters <= 50:
-        km = KMeans(n_clusters=num_clusters)
-        km.fit_predict(embedding_unlabeled)
-    else:
-        km = MiniBatchKMeans(n_clusters=num_clusters, batch_size=5000)
-        km.fit_predict(embedding_unlabeled)
-    cluster_centers, cluster_idx = km.cluster_centers_, km.labels_
-    # clustering_model = fps_analysis()
-    # cluster_centers, cluster_idx, cluster_dist = clustering_model.predict(embedding_unlabeled)
+    # unlabeled_raw = self.get_raw_embeddings(unlabeled_data)
+    # num_clusters = 60
+    # if num_clusters <= 50:
+    #     km = KMeans(n_clusters=num_clusters)
+    #     km.fit_predict(embedding_unlabeled)
+    # else:
+    #     km = MiniBatchKMeans(n_clusters=num_clusters, batch_size=5000)
+    #     km.fit_predict(embedding_unlabeled)
+    # cluster_centers, cluster_idx = km.cluster_centers_, km.labels_
+    clustering_model = fps_analysis()
+    cluster_centers, cluster_idx, cluster_dist = clustering_model.predict(embedding_unlabeled)
     print("clustering stage finish!")
     query_idx = self.active_query(embedding_unlabeled, cluster_centers, cluster_idx, label_budget)
     query_idx = query_idx.astype(int)
