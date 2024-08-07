@@ -9,7 +9,7 @@ from query_strategies import RandomSampling, LeastConfidence, MarginSampling, En
 								LeastConfidenceDropout, MarginSamplingDropout, EntropySamplingDropout, \
 								KMeansSampling, KMeansSamplingGPU, KCenterGreedy, KCenterGreedyPCA, BALDDropout,  \
 								AdversarialBIM, AdversarialDeepFool, VarRatio, MeanSTD, BadgeSampling, CEALSampling, \
-								LossPredictionLoss, VAAL, WAAL, CALFD, TypiClust, ProbCover
+								LossPredictionLoss, VAAL, WAAL, DECALF, TypiClust, ProbCover
 from parameters import *
 from torchvision import transforms
 import sys
@@ -241,8 +241,8 @@ def get_strategy(STRATEGY_NAME, dataset, net, args_input, args_task):
 		return EntropySamplingDropout(dataset, net, args_input, args_task)
 	elif STRATEGY_NAME == 'KMeansSampling':
 		return KMeansSampling(dataset, net, args_input, args_task)
-	elif STRATEGY_NAME == 'CALFD':
-		return CALFD(dataset, net, args_input, args_task)
+	elif STRATEGY_NAME == 'DECALF':
+		return DECALF(dataset, net, args_input, args_task)
 	elif STRATEGY_NAME == 'TypiClust':
 		return TypiClust(dataset, net, args_input, args_task)
 	elif STRATEGY_NAME == 'ProbCover':
