@@ -80,7 +80,6 @@ class DECALF(Strategy):
         continue
       temp_neigh1 = cluster_centers[np.argsort(temp_interdist)[0], :]
       temp_neigh2 = cluster_centers[np.argsort(temp_interdist)[1], :]
-      temp_neigh3 = cluster_centers[np.argsort(temp_interdist)[2], :]
       for j in range(len(curr_cluster)):
         query_priority.append(1 + exp(-np.linalg.norm(samples[curr_cluster[j], :] - cluster_centers[i, :])**2))
         knei_dist.append(np.mean(np.sort(curr_dist[j, :])[1:num_nei+1]))
@@ -95,38 +94,38 @@ class DECALF(Strategy):
       #                             curr_dist, dth, round(num_queries * 0.5)) # 0.5
       fil_index = sortIndex1[int(round(len(query_priority) / 2)):]
       d2 = []
-      inter_dist = squareform(pdist(cluster_centers))
-      center_priority = []
-      for i_2 in range(np.shape(cluster_centers)[0]):
-        center_priority.append(np.sum(1+np.exp(-inter_dist[i_2,:])))
-      center_priority = np.array(center_priority)
-      global_center = cluster_centers[np.argmax(center_priority)]
-      temp_neigh1 = global_center
-      temp_neigh2 = cluster_centers[np.argsort(temp_interdist)[1],:]
+      # inter_dist = squareform(pdist(cluster_centers))
+      # center_priority = []
+      # for i_2 in range(np.shape(cluster_centers)[0]):
+      #   center_priority.append(np.sum(1+np.exp(-inter_dist[i_2,:])))
+      # center_priority = np.array(center_priority)
+      # global_center = cluster_centers[np.argmax(center_priority)]
+      # temp_neigh1 = global_center
+      # temp_neigh2 = cluster_centers[np.argsort(temp_interdist)[1],:]
       for k in range(len(fil_index)):
         temp_d1 = np.linalg.norm(samples[curr_cluster[fil_index[k]], :] - temp_neigh1)
         temp_d2 = np.linalg.norm(samples[curr_cluster[fil_index[k]], :] - temp_neigh2)
-        # d2.append(1 + exp(-abs((temp_d1 + temp_d2)/2 - np.linalg.norm(temp_neigh1 - temp_neigh2)/2)))
-        temp_ratio1 = max(temp_d1, temp_d2) / min(temp_d1, temp_d2)
-        d2.append(temp_ratio1)
-      # d2 = np.array(d2)
-      # sortIndex2 = np.argsort(d2)
-      # sortIndex2 = sortIndex2[::-1]
-      # fet2 = curr_cluster[fil_index[sortIndex2[:round(num_queries * 0.5)]]]
+        d2.append(1 + exp(-abs((temp_d1 + temp_d2)/2 - np.linalg.norm(temp_neigh1 - temp_neigh2)/2)))
+        # temp_ratio1 = max(temp_d1, temp_d2) / min(temp_d1, temp_d2)
+        # d2.append(temp_ratio1)
+      d2 = np.array(d2)
+      sortIndex2 = np.argsort(d2)
+      sortIndex2 = sortIndex2[::-1]
+      fet2 = curr_cluster[fil_index[sortIndex2[:round(num_queries * 0.5)]]]
       # fet2 = self.diversityfetch2(fil_index, curr_cluster,
       #                             d2, curr_dist, dth,
       #                             round(num_queries * 0.5))
-      sortIndex2 = np.argsort(d2)
-      candidate_fet2 = fil_index[sortIndex2[:int(round(num_queries * 1))]] # 0.8
-      candidate_fet2 = fil_index
-      sum_dist = []
-      for ii in range(len(candidate_fet2)):
-        candidate_d1 = np.linalg.norm(samples[curr_cluster[candidate_fet2[ii]], :] - temp_neigh1)
-        candidate_d2 = np.linalg.norm(samples[curr_cluster[candidate_fet2[ii]], :] - temp_neigh1)
-        # sum_dist.append(1 + 1 / (1 + candidate_d1 + candidate_d2))
-        sum_dist.append(candidate_d1 + candidate_d2)
-      sum_dist = np.array(sum_dist)
-      fet2 = curr_cluster[candidate_fet2[np.argsort(sum_dist)[-round(num_queries * 0.5):]]]
+      # sortIndex2 = np.argsort(d2)
+      # candidate_fet2 = fil_index[sortIndex2[:int(round(num_queries * 1))]] # 0.8
+      # candidate_fet2 = fil_index
+      # sum_dist = []
+      # for ii in range(len(candidate_fet2)):
+      #   candidate_d1 = np.linalg.norm(samples[curr_cluster[candidate_fet2[ii]], :] - temp_neigh1)
+      #   candidate_d2 = np.linalg.norm(samples[curr_cluster[candidate_fet2[ii]], :] - temp_neigh1)
+      #   # sum_dist.append(1 + 1 / (1 + candidate_d1 + candidate_d2))
+      #   sum_dist.append(candidate_d1 + candidate_d2)
+      # sum_dist = np.array(sum_dist)
+      # fet2 = curr_cluster[candidate_fet2[np.argsort(sum_dist)[-round(num_queries * 0.5):]]]
       # fet2 = self.diversityfetch2(candidate_fet2, curr_cluster,
       #                             sum_dist, curr_dist, dth,
       #                             round(num_queries * 0.5))
