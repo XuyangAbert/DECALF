@@ -116,7 +116,7 @@ class CALFD(Strategy):
         # d2.append(temp_ratio1)
       d2 = np.array(d2)
       sortIndex2 = np.argsort(d2)
-      fet2 = fil_index[sortIndex2[-round(num_queries * 0.5):]]
+      fet2 = fil_index[fil_index[sortIndex2[-round(num_queries * 0.5):]]]
       # fet2 = self.diversityfetch2(fil_index, curr_cluster,
       #                             d2, curr_dist, dth,
       #                             round(num_queries * 0.5))
