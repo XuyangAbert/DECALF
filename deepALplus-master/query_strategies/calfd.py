@@ -99,7 +99,7 @@ class CALFD(Strategy):
       # fil_index = sortIndex1[-int(round(len(query_priority) / 2)):]
       fil_index = sortIndex1[-round(num_queries * 0.5):]
       d2 = []
-      fet2 = []
+      # fet2 = []
       inter_dist = squareform(pdist(cluster_centers))
       center_priority = []
       for i_2 in range(np.shape(cluster_centers)[0]):
