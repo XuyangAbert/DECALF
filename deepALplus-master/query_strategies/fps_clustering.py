@@ -260,7 +260,7 @@ class fps_analysis(object):
                     fitX = self.fitness_cal(sample, X, stdData, gamma)
                     fitP = P_fitness[i]
                     fitN = P_fitness[MinIndice]
-                    if fitX < 0.98 * min(fitN, fitP):
+                    if fitX < 0.85 * min(fitN, fitP):
                         Merge = False
                     if Merge:
                         Com.append([i, MinIndice])
@@ -317,7 +317,7 @@ class fps_analysis(object):
                     fitX = self.fitness_update(P_summary, X, RfitX, PreStd, gamma, stdData)
                     fitP = P_fitness[i]
                     fitN = P_fitness[MinIndice]
-                    if fitX < 0.98 * min(fitN, fitP):
+                    if fitX < 0.85 * min(fitN, fitP):
                         Merge = False
                     if Merge:
                         Com.append([i, MinIndice])
