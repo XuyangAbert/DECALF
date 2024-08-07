@@ -91,7 +91,7 @@ class DECALF(Strategy):
       fet1 = self.diversityfetch1(sortIndex1[:round(len(query_priority) / 2)],
                                   curr_cluster,
                                   query_priority[sortIndex1[:round(len(query_priority) / 2)]],
-                                  curr_dist, dth, round(num_queries * 1)) # 0.5
+                                  curr_dist, dth, round(num_queries * 0.5)) # 0.5
       fil_index = sortIndex1[int(round(len(query_priority) / 2)):]
       d2 = []
       # inter_dist = squareform(pdist(cluster_centers))
@@ -131,7 +131,7 @@ class DECALF(Strategy):
       #                             round(num_queries * 0.5))
       
       query_idx = np.append(query_idx, fet1)
-      # query_idx = np.append(query_idx, fet2)
+      query_idx = np.append(query_idx, fet2)
     print('No of unique idxs:', len(np.unique(query_idx)))
     return query_idx
 
@@ -139,16 +139,16 @@ class DECALF(Strategy):
     unlabeled_idxs, unlabeled_data = self.dataset.get_unlabeled_data()
     embedding_unlabeled = self.get_embeddings(unlabeled_data).numpy()
     # unlabeled_raw = self.get_raw_embeddings(unlabeled_data)
-    # num_clusters = 500
-    # if num_clusters <= 50:
-    #     km = KMeans(n_clusters=num_clusters)
-    #     km.fit_predict(embedding_unlabeled)
-    # else:
-    #     km = MiniBatchKMeans(n_clusters=num_clusters, batch_size=5000)
-    #     km.fit_predict(embedding_unlabeled)
-    # cluster_centers, cluster_idx = km.cluster_centers_, km.labels_
-    clustering_model = fps_analysis()
-    cluster_centers, cluster_idx, cluster_dist = clustering_model.predict(embedding_unlabeled)
+    num_clusters = 60
+    if num_clusters <= 50:
+        km = KMeans(n_clusters=num_clusters)
+        km.fit_predict(embedding_unlabeled)
+    else:
+        km = MiniBatchKMeans(n_clusters=num_clusters, batch_size=5000)
+        km.fit_predict(embedding_unlabeled)
+    cluster_centers, cluster_idx = km.cluster_centers_, km.labels_
+    # clustering_model = fps_analysis()
+    # cluster_centers, cluster_idx, cluster_dist = clustering_model.predict(embedding_unlabeled)
     print("clustering stage finish!")
     query_idx = self.active_query(embedding_unlabeled, cluster_centers, cluster_idx, label_budget)
     query_idx = query_idx.astype(int)
