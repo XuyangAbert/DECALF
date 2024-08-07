@@ -87,11 +87,11 @@ class DECALF(Strategy):
       sortIndex1 = sortIndex1[::-1]
       dth = np.mean(knei_dist) # 0.0001
       query_priority = np.array(query_priority)
-      # fet1 = curr_cluster[sortIndex1[:round(num_queries * 0.5)]]
-      fet1 = self.diversityfetch1(sortIndex1[:round(len(query_priority) / 2)],
-                                  curr_cluster,
-                                  query_priority[sortIndex1[:round(len(query_priority) / 2)]],
-                                  curr_dist, dth, round(num_queries * 0.5)) # 0.5
+      fet1 = curr_cluster[sortIndex1[:round(num_queries * 0.5)]]
+      # fet1 = self.diversityfetch1(sortIndex1[:round(len(query_priority) / 2)],
+      #                             curr_cluster,
+      #                             query_priority[sortIndex1[:round(len(query_priority) / 2)]],
+      #                             curr_dist, dth, round(num_queries * 0.5)) # 0.5
       fil_index = sortIndex1[int(round(len(query_priority) / 2)):]
       d2 = []
       # inter_dist = squareform(pdist(cluster_centers))
@@ -111,10 +111,10 @@ class DECALF(Strategy):
       d2 = np.array(d2)
       sortIndex2 = np.argsort(d2)
       sortIndex2 = sortIndex2[::-1]
-      # fet2 = curr_cluster[fil_index[sortIndex2[:round(num_queries * 0.5)]]]
-      fet2 = self.diversityfetch2(fil_index, curr_cluster,
-                                  d2, curr_dist, dth,
-                                  round(num_queries * 0.5))
+      fet2 = curr_cluster[fil_index[sortIndex2[:round(num_queries * 0.5)]]]
+      # fet2 = self.diversityfetch2(fil_index, curr_cluster,
+      #                             d2, curr_dist, dth,
+      #                             round(num_queries * 0.5))
       # sortIndex2 = np.argsort(d2)
       # candidate_fet2 = fil_index[sortIndex2[:int(round(num_queries * 1))]] # 0.8
       # candidate_fet2 = fil_index
