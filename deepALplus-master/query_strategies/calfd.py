@@ -96,7 +96,8 @@ class CALFD(Strategy):
       #                             query_priority[sortIndex1[:round(len(query_priority) / 2)]],
       #                             curr_dist, dth, round(num_queries * 0.5)) # 0.5
       # print("No. of Unique Query idx from center regions:", len(np.unique(fet1)))
-      fil_index = sortIndex1[-int(round(len(query_priority) / 2)):]
+      # fil_index = sortIndex1[-int(round(len(query_priority) / 2)):]
+      fil_index = sortIndex1[-round(num_queries * 0.5):]
       d2 = []
       fet2 = []
       inter_dist = squareform(pdist(cluster_centers))
@@ -116,7 +117,7 @@ class CALFD(Strategy):
         # d2.append(temp_ratio1)
       d2 = np.array(d2)
       sortIndex2 = np.argsort(d2)
-      fet2 = fil_index[fil_index[sortIndex2[-round(num_queries * 0.5):]]]
+      fet2 = fil_index[sortIndex2[-round(num_queries * 0.5):]]
       # fet2 = self.diversityfetch2(fil_index, curr_cluster,
       #                             d2, curr_dist, dth,
       #                             round(num_queries * 0.5))
