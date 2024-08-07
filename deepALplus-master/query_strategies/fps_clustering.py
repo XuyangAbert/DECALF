@@ -89,7 +89,7 @@ class fps_analysis(object):
         pop_Index = np.arange(0, N)
         pop = sample[pop_Index, :]
         # Calculate the initial niche radius
-        radius = numpy.linalg.norm((maxLimit - minLimit)) * 0.3  # 0.4
+        radius = numpy.linalg.norm((maxLimit - minLimit)) * 0.4  # 0.4
 
         return [stdData, pop_Index, pop, radius, PreMu, PreStd]
 
@@ -260,7 +260,7 @@ class fps_analysis(object):
                     fitX = self.fitness_cal(sample, X, stdData, gamma)
                     fitP = P_fitness[i]
                     fitN = P_fitness[MinIndice]
-                    if fitX < 0.85 * min(fitN, fitP):
+                    if fitX < 0.98 * min(fitN, fitP):
                         Merge = False
                     if Merge:
                         Com.append([i, MinIndice])
@@ -317,7 +317,7 @@ class fps_analysis(object):
                     fitX = self.fitness_update(P_summary, X, RfitX, PreStd, gamma, stdData)
                     fitP = P_fitness[i]
                     fitN = P_fitness[MinIndice]
-                    if fitX < 0.85 * min(fitN, fitP):
+                    if fitX < 0.98 * min(fitN, fitP):
                         Merge = False
                     if Merge:
                         Com.append([i, MinIndice])
