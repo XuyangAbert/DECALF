@@ -97,7 +97,7 @@ class CALFD(Strategy):
       #                             curr_dist, dth, round(num_queries * 0.5)) # 0.5
       # print("No. of Unique Query idx from center regions:", len(np.unique(fet1)))
       # fil_index = sortIndex1[-int(round(len(query_priority) / 2)):]
-      fil_index = sortIndex1[-round(num_queries * 0.5):]
+      fil_index = sortIndex1[round(num_queries * 0.5):]
       d2 = []
       # fet2 = []
       inter_dist = squareform(pdist(cluster_centers))
