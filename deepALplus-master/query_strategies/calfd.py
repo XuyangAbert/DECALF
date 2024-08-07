@@ -95,9 +95,7 @@ class CALFD(Strategy):
       #                             curr_cluster,
       #                             query_priority[sortIndex1[:round(len(query_priority) / 2)]],
       #                             curr_dist, dth, round(num_queries * 0.5)) # 0.5
-      # print("No. of Unique Query idx from center regions:", len(np.unique(fet1)))
-      # fil_index = sortIndex1[-int(round(len(query_priority) / 2)):]
-      fil_index = sortIndex1[round(num_queries * 0.5):]
+      fil_index = sortIndex1[-int(round(len(query_priority) / 2)):]
       d2 = []
       # fet2 = []
       inter_dist = squareform(pdist(cluster_centers))
@@ -140,6 +138,7 @@ class CALFD(Strategy):
       query_idx = np.append(query_idx, fet1)
       query_idx = np.append(query_idx, fet2)
     print('No of unique idxs:', len(np.unique(query_idx)))
+    print('No of idxs:', len(query_idx))
     return query_idx
 
   def query(self, label_budget):
