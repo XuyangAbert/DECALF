@@ -91,7 +91,7 @@ class DECALF(Strategy):
       fet1 = self.diversityfetch1(sortIndex1[:round(len(query_priority) / 2)],
                                   curr_cluster,
                                   query_priority[sortIndex1[:round(len(query_priority) / 2)]],
-                                  curr_dist, dth, round(num_queries * 0.5)) # 0.5
+                                  curr_dist, dth, round(num_queries * 1)) # 0.5
       fil_index = sortIndex1[int(round(len(query_priority) / 2)):]
       d2 = []
       # inter_dist = squareform(pdist(cluster_centers))
@@ -131,7 +131,7 @@ class DECALF(Strategy):
       #                             round(num_queries * 0.5))
       
       query_idx = np.append(query_idx, fet1)
-      query_idx = np.append(query_idx, fet2)
+      # query_idx = np.append(query_idx, fet2)
     print('No of unique idxs:', len(np.unique(query_idx)))
     return query_idx
 
