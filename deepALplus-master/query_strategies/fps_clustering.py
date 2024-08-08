@@ -81,7 +81,7 @@ class fps_analysis(object):
         # Compute the standard deviation of the current data chunk
         MD = np.matlib.repmat(meanData, N, 1)
         tempSum = np.sum(np.sum((MD - sample) ** 2, axis=1))
-        # stdData = tempSum / N
+        stdData = tempSum / N
         stdData = stdData**0.5
         # Update the standard deviation of the data stream
         stdData = self.stdupdate(stdData, PreStd, Buffersize)
