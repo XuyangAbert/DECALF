@@ -40,9 +40,9 @@ class fps_analysis(object):
         Dist = self.distance_cal(Newsample)
         fitness = []
         for i in range(Np):
-            distArray = np.power(Dist[i + Ns, 0:Ns], 2)
+            # distArray = np.power(Dist[i + Ns, 0:Ns], 2)
             # distArray = np.power(Dist[i + Ns, 0:Ns], 1)
-            # distArray = Dist[i + Ns, 0:Ns]
+            distArray = Dist[i + Ns, 0:Ns]
             temp = np.power(np.exp(-distArray / stdData), gamma)
             fitness.append(np.sum(temp))
         return fitness
@@ -63,8 +63,8 @@ class fps_analysis(object):
                         break
                     else:
                         d = np.linalg.norm(Current[i][:] - PreP[j][:])
-                        fitin += (exp(-d ** 2 / stdData) ** gamma) * (PreFit[j] ** (OldStd / stdData))
-                        # fitin += (exp(-d / stdData) ** gamma) * (PreFit[j] ** (OldStd / stdData))
+                        # fitin += (exp(-d ** 2 / stdData) ** gamma) * (PreFit[j] ** (OldStd / stdData))
+                        fitin += (exp(-d / stdData) ** gamma) * (PreFit[j] ** (OldStd / stdData))
                 NewFit[i] = fitness[i] + fitin
         return NewFit
 
@@ -81,8 +81,8 @@ class fps_analysis(object):
         # Compute the standard deviation of the current data chunk
         MD = np.matlib.repmat(meanData, N, 1)
         tempSum = np.sum(np.sum((MD - sample) ** 2, axis=1))
-        stdData = tempSum / N
-        # stdData = np.sum(np.sum(abs(MD - sample), axis=1)) # stdData**0.5
+        # stdData = tempSum / N
+        stdData = np.sum(np.sum(abs(MD - sample), axis=1)) # stdData**0.5
         # Update the standard deviation of the data stream
         stdData = self.stdupdate(stdData, PreStd, Buffersize)
         # Randonmly Initialize the population indices from the data chunk
@@ -125,9 +125,9 @@ class fps_analysis(object):
             den1 = []
             den2 = []
             for i in range(N - 1):
-                Diff = np.power(Dist[i, :], 2)
+                # Diff = np.power(Dist[i, :], 2)
                 # Diff = np.power(Dist[i, :], 1)
-                # Diff = Dist[i, :]
+                Diff = Dist[i, :]
                 temp1 = np.power(np.exp(-Diff / stdData), gamma * m)
                 temp2 = np.power(np.exp(-Diff / stdData), gamma * (m + 1))
                 den1.append(np.sum(temp1))
@@ -153,7 +153,7 @@ class fps_analysis(object):
             den1 = []
             den2 = []
             for i in range(N):
-                Diff = np.power(Dist[i, 0:N1], 2)
+                # Diff = np.power(Dist[i, 0:N1], 2)
                 # Diff = np.power(Dist[i, 0:N1], 1)
                 Diff = Dist[i, 0:N1]
                 temp1 = np.power(np.exp(-Diff / stdData), gam1)
