@@ -82,7 +82,7 @@ class fps_analysis(object):
         MD = np.matlib.repmat(meanData, N, 1)
         tempSum = np.sum(np.sum((MD - sample) ** 2, axis=1))
         stdData = tempSum / N
-        # stdData = stdData**0.5
+        # stdData = np.sum(np.sum(abs(MD - sample), axis=1)) # stdData**0.5
         # Update the standard deviation of the data stream
         stdData = self.stdupdate(stdData, PreStd, Buffersize)
         # Randonmly Initialize the population indices from the data chunk
