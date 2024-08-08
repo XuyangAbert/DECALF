@@ -107,7 +107,7 @@ class DECALF(Strategy):
         temp_d2 = np.linalg.norm(samples[curr_cluster[fil_index[k]], :] - temp_neigh2)
         # d2.append(1 + exp(-abs((temp_d1 + temp_d2)/2 - np.linalg.norm(temp_neigh1 - temp_neigh2)/2)))
         
-        temp_sum1 = (temp_d1 + temp_d2)
+        temp_sum1 = (temp_d1 + temp_d2)/np.linalg.norm(temp_neigh1 - temp_neigh2))
         temp_ratio1 = max(temp_d1, temp_d2) / min(temp_d1, temp_d2)
         bi_criteria = temp_sum1 * temp_ratio1
         d2.append(1 + exp(-bi_criteria))
