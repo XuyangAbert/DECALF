@@ -119,7 +119,7 @@ class fps_analysis(object):
     def cca(self, sample, stdData, Dist):
         m = 1
         gamma = 5
-        ep = 0.985 # 0.998
+        ep = 0.998 # 0.998
         N = np.shape(sample)[0]
         while 1:
             den1 = []
@@ -144,7 +144,7 @@ class fps_analysis(object):
         gam1 = gamma
         N1 = np.shape(sample)[0]
         N2 = np.shape(P_Center)[0]
-        ep = 0.985 # 0.998
+        ep = 0.998 # 0.998
         N = N1 + N2
         temp = np.concatenate([sample, P_Center], axis=0)
         Dist = self.distance_cal(temp)
