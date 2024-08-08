@@ -115,7 +115,7 @@ class Net:
 			    embeddings = x.numpy()
 		    else:
 			    embeddings = np.concatenate([embeddings, x.numpy()])
-		    # embeddings.append(x)
+		    i += 1
 	    # embeddings_array = np.array(embeddings)
 	    print(embeddings.shape)
 	    return embeddings
