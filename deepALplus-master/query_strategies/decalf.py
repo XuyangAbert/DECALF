@@ -92,16 +92,16 @@ class DECALF(Strategy):
                                   curr_cluster,
                                   query_priority[sortIndex1[:round(len(query_priority) / 2)]],
                                   curr_dist, dth, round(num_queries * 0.5)) # 0.5
-      fil_index = sortIndex1[int(round(len(query_priority) / 2)):]
+      fil_index = sortIndex1[round(num_queries * 0.5):]
       d2 = []
-      inter_dist = squareform(pdist(cluster_centers))
-      center_priority = []
-      for i_2 in range(np.shape(cluster_centers)[0]):
-        center_priority.append(np.sum(1+np.exp(-inter_dist[i_2,:])))
-      center_priority = np.array(center_priority)
-      global_center = cluster_centers[np.argmax(center_priority)]
-      temp_neigh1 = global_center
-      temp_neigh2 = cluster_centers[np.argsort(temp_interdist)[1],:]
+      # inter_dist = squareform(pdist(cluster_centers))
+      # center_priority = []
+      # for i_2 in range(np.shape(cluster_centers)[0]):
+      #   center_priority.append(np.sum(1+np.exp(-inter_dist[i_2,:])))
+      # center_priority = np.array(center_priority)
+      # global_center = cluster_centers[np.argmax(center_priority)]
+      # temp_neigh1 = global_center
+      # temp_neigh2 = cluster_centers[np.argsort(temp_interdist)[1],:]
       for k in range(len(fil_index)):
         temp_d1 = np.linalg.norm(samples[curr_cluster[fil_index[k]], :] - temp_neigh1)
         temp_d2 = np.linalg.norm(samples[curr_cluster[fil_index[k]], :] - temp_neigh2)
@@ -141,9 +141,9 @@ class DECALF(Strategy):
 
   def query(self, label_budget):
     unlabeled_idxs, unlabeled_data = self.dataset.get_unlabeled_data()
-    # embedding_unlabeled = self.get_embeddings(unlabeled_data).numpy()
-    unlabeled_raw = self.get_raw_embeddings(unlabeled_data)
-    embedding_unlabeled = unlabeled_raw
+    embedding_unlabeled = self.get_embeddings(unlabeled_data).numpy()
+    # unlabeled_raw = self.get_raw_embeddings(unlabeled_data)
+    # embedding_unlabeled = unlabeled_raw
     # num_clusters = 60
     # if num_clusters <= 50:
     #     km = KMeans(n_clusters=num_clusters)
