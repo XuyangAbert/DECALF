@@ -146,8 +146,8 @@ class DECALF(Strategy):
   def query(self, label_budget):
     unlabeled_idxs, unlabeled_data = self.dataset.get_unlabeled_data()
     embedding_unlabeled = self.get_embeddings(unlabeled_data).numpy()
-    unlabeled_raw = self.get_raw_embeddings(unlabeled_data)
-    embedding_unlabeled = unlabeled_raw
+    # unlabeled_raw = self.get_raw_embeddings(unlabeled_data)
+    # embedding_unlabeled = unlabeled_raw
     num_clusters = 30
     if num_clusters <= 50:
         km = KMeans(n_clusters=num_clusters)
