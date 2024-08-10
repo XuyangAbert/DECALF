@@ -73,7 +73,7 @@ class DECALF(Strategy):
     for i in range(np.shape(cluster_centers)[0]):
       curr_cluster = np.where(cluster_idx == i)[0]
       curr_dist = squareform(pdist(samples[curr_cluster]))
-      num_queries = round(label_budget * len(curr_dist) / np.shape(samples)[0])
+      num_queries = math.ceil(label_budget * len(curr_dist) / np.shape(samples)[0])
       num_nei = 3
       knei_dist, query_priority = [], []
       temp_interdist = dist_cluster[i, :]
