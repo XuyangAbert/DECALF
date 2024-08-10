@@ -90,7 +90,7 @@ class DECALF(Strategy):
         knei_dist.append(np.mean(np.sort(curr_dist[j, :])[1:num_nei+1]))
       sortIndex1 = np.argsort(query_priority)
       sortIndex1 = sortIndex1[::-1]
-      dth = 1*np.mean(knei_dist) # 0.0001
+      dth = 0.01*np.mean(knei_dist) # 0.0001
       query_priority = np.array(query_priority)
       # fet1 = curr_cluster[sortIndex1[:round(num_queries * 0.5)]]
       fet1 = self.diversityfetch1(sortIndex1[:round(len(query_priority) / 2)],
