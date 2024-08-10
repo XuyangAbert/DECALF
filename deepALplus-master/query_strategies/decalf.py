@@ -86,7 +86,7 @@ class DECALF(Strategy):
       temp_neigh1 = cluster_centers[np.argsort(temp_interdist)[0], :]
       temp_neigh2 = cluster_centers[np.argsort(temp_interdist)[1], :]
       for j in range(len(curr_cluster)):
-        query_priority.append(1 + exp(-np.linalg.norm(samples[curr_cluster[j], :] - cluster_centers[i, :])**2))
+        query_priority.append(1 + exp(-np.linalg.norm(samples[curr_cluster[j], :] - cluster_centers[i, :])))
         knei_dist.append(np.mean(np.sort(curr_dist[j, :])[1:num_nei+1]))
       sortIndex1 = np.argsort(query_priority)
       sortIndex1 = sortIndex1[::-1]
