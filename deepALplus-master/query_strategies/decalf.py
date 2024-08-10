@@ -148,14 +148,14 @@ class DECALF(Strategy):
     embedding_unlabeled = self.get_embeddings(unlabeled_data).numpy()
     # unlabeled_raw = self.get_raw_embeddings(unlabeled_data)
     # embedding_unlabeled = unlabeled_raw
-    num_clusters = 30
-    if num_clusters <= 50:
-        km = KMeans(n_clusters=num_clusters)
-        km.fit_predict(embedding_unlabeled)
-    else:
-        km = MiniBatchKMeans(n_clusters=num_clusters, batch_size=5000)
-        km.fit_predict(embedding_unlabeled)
-    cluster_centers, cluster_idx = km.cluster_centers_, km.labels_
+    # num_clusters = 30
+    # if num_clusters <= 50:
+    #     km = KMeans(n_clusters=num_clusters)
+    #     km.fit_predict(embedding_unlabeled)
+    # else:
+    #     km = MiniBatchKMeans(n_clusters=num_clusters, batch_size=5000)
+    #     km.fit_predict(embedding_unlabeled)
+    # cluster_centers, cluster_idx = km.cluster_centers_, km.labels_
     # clustering_model = fps_analysis()
     # cluster_centers, cluster_idx, cluster_dist = clustering_model.predict(embedding_unlabeled)
     print("clustering stage finish!", np.shape(cluster_centers)[0])
