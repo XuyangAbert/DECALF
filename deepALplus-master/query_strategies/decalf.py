@@ -26,6 +26,7 @@ from sklearn.metrics import f1_score,precision_score,auc
 from sklearn.metrics import accuracy_score,recall_score
 from sklearn.linear_model import LogisticRegression as LR
 from sklearn.svm import SVC,LinearSVC
+import math
 import warnings
 warnings.filterwarnings("ignore", category=np.VisibleDeprecationWarning)
 
@@ -95,7 +96,7 @@ class DECALF(Strategy):
       fet1 = self.diversityfetch1(sortIndex1[:round(len(query_priority) / 2)],
                                   curr_cluster,
                                   query_priority[sortIndex1[:round(len(query_priority) / 2)]],
-                                  curr_dist, dth, round(num_queries * 0.5)+1) # 0.5
+                                  curr_dist, dth, math.ceil(num_queries * 0.5)) # 0.5
       fil_index = sortIndex1[round(num_queries * 0.5):]
       d2 = []
       inter_dist = squareform(pdist(cluster_centers))
@@ -122,7 +123,7 @@ class DECALF(Strategy):
       # fet2 = curr_cluster[fil_index[sortIndex2[:round(num_queries * 0.5)]]]
       fet2 = self.diversityfetch2(fil_index, curr_cluster,
                                   d2, curr_dist, dth,
-                                  round(num_queries * 0.5)+1)
+                                  math.ceil(num_queries * 0.5))
       # sortIndex2 = np.argsort(d2)
       # candidate_fet2 = fil_index[sortIndex2[:int(round(num_queries * 1))]] # 0.8
       # candidate_fet2 = fil_index
