@@ -44,7 +44,7 @@ class DECALF(Strategy):
       fetch1.append(current[candidate_fet1[top_idx]])
       neighbordist = chunked_dist[top_idx, :]
       neighboridx = np.where(neighbordist <= dth)[0]
-      priority1[top_idx] = priority1[top_idx] / (1 + 200 * np.sum(priority1[neighboridx]))
+      priority1[top_idx] = priority1[top_idx] / (1 + 20 * np.sum(priority1[neighboridx]))
       priority1[neighboridx] = priority1[neighboridx] / (1 + np.sum(priority1[neighboridx]))
     fetch1 = np.asarray(fetch1)
     fetch1 = fetch1.astype(int)
@@ -60,7 +60,7 @@ class DECALF(Strategy):
       fetch2.append(current[candidate_fet2[top_idx]])
       neighbordist = chunked_dist[top_idx][:]
       neighboridx = np.where(neighbordist <= dth)[0]
-      priority2[top_idx] = priority2[top_idx] / (1 + 200 * np.sum(priority2[neighboridx]))
+      priority2[top_idx] = priority2[top_idx] / (1 + 20 * np.sum(priority2[neighboridx]))
       priority2[neighboridx] = priority2[neighboridx] / (1 + np.sum(priority2[neighboridx]))
     fetch2 = np.asarray(fetch2)
     fetch2 = fetch2.astype(int)
