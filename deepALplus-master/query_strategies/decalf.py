@@ -168,6 +168,6 @@ class DECALF(Strategy):
     clustering_model = fps_analysis()
     cluster_centers, cluster_idx, cluster_dist = clustering_model.predict(embedding_unlabeled)
     print("clustering stage finish!", np.shape(cluster_centers)[0])
-    query_idx = self.active_query(embedding_samples, cluster_centers, cluster_idx, label_budget)
+    query_idx = self.active_query(embedding_unlabeled, cluster_centers, cluster_idx, label_budget)
     query_idx = query_idx.astype(int)
     return unlabeled_idxs[query_idx]
