@@ -21,7 +21,7 @@ class fps_analysis(object):
         pass
 
     def paramspec(self, data):
-        Buffersize = 1000
+        Buffersize = 500
         PreStd = []
         P_Summary = []
         PFS = []
@@ -243,7 +243,7 @@ class fps_analysis(object):
         Nc = np.shape(P)[0]
         for i in range(Nc):
             MinDist = np.inf
-            MinIndice = 100000
+            MinIndice = np.inf
             if i not in marked:
                 for j in range(Nc):
                     if j != i and j not in marked:
@@ -260,7 +260,7 @@ class fps_analysis(object):
                     fitX = self.fitness_cal(sample, X, stdData, gamma)
                     fitP = P_fitness[i]
                     fitN = P_fitness[MinIndice]
-                    if fitX < 0.85 * min(fitN, fitP):
+                    if fitX < 0.98 * min(fitN, fitP):
                         Merge = False
                     if Merge:
                         Com.append([i, MinIndice])
@@ -300,7 +300,7 @@ class fps_analysis(object):
 
         for i in range(Nc):
             MinDist = np.inf
-            MinIndice = 100000
+            MinIndice = np.inf
             if i not in marked:
                 for j in range(Nc):
                     if j != i and j not in marked:
@@ -317,7 +317,7 @@ class fps_analysis(object):
                     fitX = self.fitness_update(P_summary, X, RfitX, PreStd, gamma, stdData)
                     fitP = P_fitness[i]
                     fitN = P_fitness[MinIndice]
-                    if fitX < 0.85 * min(fitN, fitP):
+                    if fitX < 0.98 * min(fitN, fitP):
                         Merge = False
                     if Merge:
                         Com.append([i, MinIndice])
