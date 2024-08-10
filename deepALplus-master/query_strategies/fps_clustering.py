@@ -541,7 +541,7 @@ class fps_analysis(object):
                 PF = np.asarray(P_fitness)
             P_Summary = self.clustersummary(P, PF, P_Summary, sample)
             PreStd, PFS = self.storeinf(PF, PFS, PreStd, stdData)
-            print(f'batch {t} finished!')
+            # print(f'batch {t} finished!')
         # Clustering procedure finishes
         [MinDist, ClusterIndice] = self.cluster_assign(AccSample, P)
         return P, ClusterIndice, MinDist
