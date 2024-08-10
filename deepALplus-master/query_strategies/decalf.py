@@ -45,7 +45,7 @@ class DECALF(Strategy):
       neighbordist = chunked_dist[top_idx, :]
       neighboridx = np.where(neighbordist <= dth)[0]
       priority1[top_idx] = priority1[top_idx] / (1 + 200 * np.sum(priority1[neighboridx]))
-      priority1[neighboridx] = priority1[neighboridx] / (1 + 1 * np.sum(priority1[neighboridx]))
+      priority1[neighboridx] = priority1[neighboridx] / (1 + np.sum(priority1[neighboridx]))
     fetch1 = np.asarray(fetch1)
     fetch1 = fetch1.astype(int)
     return fetch1
@@ -61,7 +61,7 @@ class DECALF(Strategy):
       neighbordist = chunked_dist[top_idx][:]
       neighboridx = np.where(neighbordist <= dth)[0]
       priority2[top_idx] = priority2[top_idx] / (1 + 200 * np.sum(priority2[neighboridx]))
-      priority2[neighboridx] = priority2[neighboridx] / (1 + 1 * np.sum(priority2[neighboridx]))
+      priority2[neighboridx] = priority2[neighboridx] / (1 + np.sum(priority2[neighboridx]))
     fetch2 = np.asarray(fetch2)
     fetch2 = fetch2.astype(int)
     return fetch2
@@ -90,7 +90,7 @@ class DECALF(Strategy):
         knei_dist.append(np.mean(np.sort(curr_dist[j, :])[1:num_nei+1]))
       sortIndex1 = np.argsort(query_priority)
       sortIndex1 = sortIndex1[::-1]
-      dth = 1*np.mean(knei_dist) # 0.0001
+      dth = np.mean(knei_dist) # 0.0001
       query_priority = np.array(query_priority)
       # fet1 = curr_cluster[sortIndex1[:round(num_queries * 0.5)]]
       fet1 = self.diversityfetch1(sortIndex1[:round(len(query_priority) / 2)],
