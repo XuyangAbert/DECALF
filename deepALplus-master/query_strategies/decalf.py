@@ -80,7 +80,7 @@ class DECALF(Strategy):
       # random_selection = rng.choice(curr_cluster, size=num_queries, replace=False)
       # query_idx = np.append(query_idx, random_selection)
       if len(curr_cluster) < 2:
-        # query_idx = np.append(query_idx, curr_cluster)
+        query_idx = np.append(query_idx, curr_cluster)
         continue
       temp_neigh1 = cluster_centers[np.argsort(temp_interdist)[0], :]
       temp_neigh2 = cluster_centers[np.argsort(temp_interdist)[1], :]
