@@ -153,8 +153,8 @@ class DECALF(Strategy):
   def query(self, label_budget):
     unlabeled_idxs, unlabeled_data = self.dataset.get_unlabeled_data()
     embedding_unlabeled = self.get_embeddings(unlabeled_data).numpy()
-    idxs, samples = self.dataset.get_train_data()
-    embedding_samples = self.get_embeddings(samples).numpy()
+    # idxs, samples = self.dataset.get_train_data()
+    # embedding_samples = self.get_embeddings(samples).numpy()
     # unlabeled_raw = self.get_raw_embeddings(unlabeled_data)
     # embedding_unlabeled = unlabeled_raw
     # num_clusters = 30
@@ -166,7 +166,7 @@ class DECALF(Strategy):
     #     km.fit_predict(embedding_unlabeled)
     # cluster_centers, cluster_idx = km.cluster_centers_, km.labels_
     clustering_model = fps_analysis()
-    cluster_centers, cluster_idx, cluster_dist = clustering_model.predict(embedding_samples)
+    cluster_centers, cluster_idx, cluster_dist = clustering_model.predict(embedding_unlabeled)
     print("clustering stage finish!", np.shape(cluster_centers)[0])
     query_idx = self.active_query(embedding_samples, cluster_centers, cluster_idx, label_budget)
     query_idx = query_idx.astype(int)
