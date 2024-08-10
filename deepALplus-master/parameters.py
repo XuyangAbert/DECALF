@@ -103,7 +103,7 @@ args_pool = {'MNIST':
 				 'pretrained': False,
 				 'optimizer_args':{'lr': 0.001}},
 			'TinyImageNet':
-				{'n_epoch': 40,    
+				{'n_epoch': 100,    
 				 'name': 'TinyImageNet',
 				 'transform_train': transforms.Compose([transforms.RandomRotation(20), transforms.RandomHorizontalFlip(0.5), transforms.ToTensor(), transforms.Normalize([0.4802, 0.4481, 0.3975], [0.2302, 0.2265, 0.2262])]),
 				 'transform': transforms.Compose([transforms.ToTensor(), transforms.Normalize([0.4802, 0.4481, 0.3975], [0.2302, 0.2265, 0.2262])]),
