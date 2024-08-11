@@ -98,6 +98,7 @@ class DECALF(Strategy):
                                   query_priority[sortIndex1[:round(len(query_priority) / 2)]],
                                   curr_dist, dth, math.ceil(num_queries * 0.5)) # 0.5
       fil_index = sortIndex1[-int(round(len(query_priority) / 2)):] 
+      # fil_index = fil_index[sortIndex2[:int(round(num_queries * 0.8))]]
       d2 = []
       inter_dist = squareform(pdist(cluster_centers))
       center_priority = []
@@ -119,7 +120,7 @@ class DECALF(Strategy):
         # d2.append(temp_ratio1)
       d2 = np.array(d2)
       sortIndex2 = np.argsort(d2)
-      candidate_fet2 = fil_index[sortIndex2[:int(round(num_queries * 0.8))]]
+      # candidate_fet2 = fil_index[sortIndex2[:int(round(num_queries * 0.8))]]
       # fet2 = curr_cluster[fil_index[sortIndex2[:round(num_queries * 0.5)]]] # fil_index[sortIndex2]
       fet2 = self.diversityfetch2(candidate_fet2 , curr_cluster,
                                   d2, curr_dist, dth,
