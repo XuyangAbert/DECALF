@@ -122,7 +122,7 @@ class DECALF(Strategy):
       sortIndex2 = np.argsort(d2)
       # candidate_fet2 = fil_index[sortIndex2[:int(round(num_queries * 0.8))]]
       # fet2 = curr_cluster[fil_index[sortIndex2[:round(num_queries * 0.5)]]] # fil_index[sortIndex2]
-      fet2 = self.diversityfetch2(candidate_fet2 , curr_cluster,
+      fet2 = self.diversityfetch2(fil_index, curr_cluster,
                                   d2, curr_dist, dth,
                                   math.ceil(num_queries * 0.5))
       # fil_index = sortIndex1[-int(round(len(query_priority) / 2)):]
