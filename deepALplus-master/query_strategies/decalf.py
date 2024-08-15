@@ -9,7 +9,7 @@ import torch
 from math import exp
 import numpy as np
 from .strategy import Strategy
-from .fps_clustering import fps_analysis
+from .ladpc_clustering import ladpc_analysis
 from sklearn.cluster import MiniBatchKMeans, KMeans
 
 from scipy.spatial.distance import pdist,squareform
@@ -111,41 +111,15 @@ class DECALF(Strategy):
       for k in range(len(fil_index)):
         temp_d1 = np.linalg.norm(samples[curr_cluster[fil_index[k]], :] - temp_neigh1)
         temp_d2 = np.linalg.norm(samples[curr_cluster[fil_index[k]], :] - temp_neigh2)
-        # d2.append(1 + exp(-abs((temp_d1 + temp_d2)/2 - np.linalg.norm(temp_neigh1 - temp_neigh2)/2)))
-        
         temp_sum1 = (temp_d1 + temp_d2)/np.linalg.norm(temp_neigh1 - temp_neigh2)
         temp_ratio1 = max(temp_d1, temp_d2) / min(temp_d1, temp_d2)
         bi_criteria = temp_sum1 * temp_ratio1
         d2.append(1 + exp(-bi_criteria))
-        # d2.append(temp_ratio1)
       d2 = np.array(d2)
       sortIndex2 = np.argsort(d2)
-      # candidate_fet2 = fil_index[sortIndex2[:int(round(num_queries * 0.8))]]
-      # fet2 = curr_cluster[fil_index[sortIndex2[:round(num_queries * 0.5)]]] # fil_index[sortIndex2]
       fet2 = self.diversityfetch2(fil_index, curr_cluster,
                                   d2, curr_dist, dth,
                                   math.ceil(num_queries * 0.5))
-      # fil_index = sortIndex1[-int(round(len(query_priority) / 2)):]
-      # d2 = []
-      # for k in range(len(fil_index)):
-      #   temp_d1 = np.linalg.norm(samples[curr_cluster[fil_index[k]], :] - temp_neigh1)
-      #   temp_d2 = np.linalg.norm(samples[curr_cluster[fil_index[k]], :] - temp_neigh2)
-      #   temp_ratio1 = max(temp_d1, temp_d2) / min(temp_d1, temp_d2)
-      #   d2.append(temp_ratio1)
-      # sortIndex2 = np.argsort(d2)
-      # candidate_fet2 = fil_index[sortIndex2[:int(round(num_queries * 0.8))]]
-      # sum_dist = []
-      # for ii in range(len(candidate_fet2)):
-      #   candidate_d1 = np.linalg.norm(samples[curr_cluster[candidate_fet2[ii]], :] - temp_neigh1)
-      #   candidate_d2 = np.linalg.norm(samples[curr_cluster[candidate_fet2[ii]], :] - temp_neigh1)
-      #   sum_dist.append(1 + 1 / (1 + candidate_d1 + candidate_d2))
-      # sortIndex3 = np.argsort(sum_dist)
-      # sortIndex3 = sortIndex3[::-1]
-      # sum_dist = np.array(sum_dist)
-      # fet2 = self.diversityfetch2(candidate_fet2, curr_cluster,
-      #                             sum_dist, curr_dist, dth,
-      #                             round(num_queries * 0.5))
-      
       query_idx = np.append(query_idx, fet1)
       query_idx = np.append(query_idx, fet2)
     print('No of unique idxs:', len(np.unique(query_idx)))
@@ -154,10 +128,6 @@ class DECALF(Strategy):
   def query(self, label_budget):
     unlabeled_idxs, unlabeled_data = self.dataset.get_unlabeled_data()
     embedding_unlabeled = self.get_embeddings(unlabeled_data).numpy()
-    # idxs, samples = self.dataset.get_train_data()
-    # embedding_samples = self.get_embeddings(samples).numpy()
-    # unlabeled_raw = self.get_raw_embeddings(unlabeled_data)
-    # embedding_unlabeled = unlabeled_raw
     # num_clusters = 30
     # if num_clusters <= 50:
     #     km = KMeans(n_clusters=num_clusters)
@@ -166,7 +136,7 @@ class DECALF(Strategy):
     #     km = MiniBatchKMeans(n_clusters=num_clusters, batch_size=5000)
     #     km.fit_predict(embedding_unlabeled)
     # cluster_centers, cluster_idx = km.cluster_centers_, km.labels_
-    clustering_model = fps_analysis()
+    clustering_model = ladpc_analysis()
     cluster_centers, cluster_idx, cluster_dist = clustering_model.predict(embedding_unlabeled)
     print("clustering stage finish!", np.shape(cluster_centers)[0])
     query_idx = self.active_query(embedding_unlabeled, cluster_centers, cluster_idx, label_budget)
