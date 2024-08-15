@@ -54,31 +54,31 @@ Our model achieves the following performance on :
 
 | Model name         | Top 1 Accuracy (20% labeled data) | F1 score (20% labeled data) |
 | ------------------ |---------------- | -------------- |
-| ResNet-18 + CALFD (Proposed) |     88.78%         |      88.50%       |
+| ResNet-18 + DECALF (Proposed) |     88.78%         |      88.50%       |
 
 ### [Image Classification on CIFAR-10](https://paperswithcode.com/dataset/cifar-10)
 
 | Model name         | Top 1 Accuracy (20% labeled data) | F1 score (20% labeled data) |
 | ------------------ |---------------- | -------------- |
-| ResNet-18 + CALFD (Proposed) |     74.47%         |      74.28%       |
+| ResNet-18 + DECALF (Proposed) |     74.47%         |      74.28%       |
 
 ### [Image Classification on CIFAR-100](https://paperswithcode.com/dataset/cifar-100)
 
 | Model name         | Top 1 Accuracy (20% labeled data) | F1 score (20% labeled data) |
 | ------------------ |---------------- | -------------- |
-| ResNet-18 + CALFD (Proposed) |     54.98%         |      54.79%       |
+| ResNet-18 + DECALF (Proposed) |     54.98%         |      54.79%       |
 
 ### [Image Classification on SVHN](https://paperswithcode.com/dataset/svhn)
 
 | Model name         | Top 1 Accuracy (20% labeled data) | F1 score (20% labeled data) |
 | ------------------ |---------------- | -------------- |
-| ResNet-18 + CALFD (Proposed) |     90.23%         |      89.43%       |
+| ResNet-18 + DECALF (Proposed) |     90.23%         |      89.43%       |
 
 ### [Image Classification on TinyImageNet](https://paperswithcode.com/dataset/tiny-imagenet)
 
 | Model name         | Top 1 Accuracy (20% labeled data) | F1 score (20% labeled data) |
 | ------------------ |---------------- | -------------- |
-| ResNet-18 + CALFD (Proposed) |     38.93%         |      38.66%       |
+| ResNet-18 + DECALF (Proposed) |     26.18%         |      15.73%       |
 
 >📋  Include a table of results from your paper, and link back to the leaderboard for clarity and context. If your main result is a figure, include that figure and link to the command or notebook to reproduce it. 
 
