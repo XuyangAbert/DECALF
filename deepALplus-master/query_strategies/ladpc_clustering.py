@@ -16,7 +16,7 @@ import warnings
 warnings.filterwarnings("ignore", category=np.VisibleDeprecationWarning)
 
 
-class fps_analysis(object):
+class ladpc_analysis(object):
     def __init__(self):
         pass
 
