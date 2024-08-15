@@ -80,9 +80,6 @@ Our model achieves the following performance on :
 | ------------------ |---------------- | -------------- |
 | ResNet-18 + DECALF (Proposed) |     26.18%         |      15.73%       |
 
->📋  Include a table of results from your paper, and link back to the leaderboard for clarity and context. If your main result is a figure, include that figure and link to the command or notebook to reproduce it. 
-
-
 ## Contributing
 
 >📋  CC-BY-4.0
