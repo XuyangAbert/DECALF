@@ -6,7 +6,7 @@ from torchvision import datasets
 from PIL import Image
 import requests
 import zipfile
-from sklearn.metrics import f1_score
+from sklearn.metrics import f1_score, confusion_matrix
 
 class Data:
     def __init__(self, X_train, Y_train, X_test, Y_test, handler, args_task):
@@ -65,6 +65,27 @@ class Data:
 
     def cal_test_f1(self, preds):
         return f1_score(self.Y_test, preds, average='macro')
+
+    def cal_classwise_metrics(self, preds):
+        cm = confusion_matrix(self.Y_test, preds)
+        precision = []
+        recall = []
+        
+        # Calculate precision and recall for each class
+        for i in range(len(cm)):
+            tp = cm[i, i]  # True positives for class i
+            fp = cm[:, i].sum() - tp  # False positives for class i
+            fn = cm[i, :].sum() - tp  # False negatives for class i
+            
+            # Precision: TP / (TP + FP)
+            precision_i = tp / (tp + fp) if (tp + fp) > 0 else 0
+            # Recall: TP / (TP + FN)
+            recall_i = tp / (tp + fn) if (tp + fn) > 0 else 0
+            
+            precision.append(precision_i)
+            recall.append(recall_i)
+        
+        return precision, recall
 
 def download_and_unzip(url, extract_to='.'):
     """
