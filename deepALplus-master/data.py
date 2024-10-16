@@ -159,6 +159,104 @@ def get_CIFAR100(handler, args_task):
     data_test = datasets.CIFAR100('./data/CIFAR100', train=False, download=True)
     return Data(data_train.data, torch.LongTensor(data_train.targets), data_test.data, torch.LongTensor(data_test.targets), handler, args_task)
 
+def get_CIFAR100_imbalanced(handler, args_task):
+    # Load the CIFAR-100 dataset
+    data_train = datasets.CIFAR100('./data/CIFAR100', train=True, download=True)
+    data_test = datasets.CIFAR100('./data/CIFAR100', train=False, download=True)
+
+    # Split the training data by class
+    class_data = {i: [] for i in range(100)}
+    for img, label in zip(data_train.data, data_train.targets):
+        class_data[label].append((img, label))
+
+    # Create an imbalanced dataset by reducing samples for some classes
+    imbalanced_train_data = []
+    for class_idx, samples in class_data.items():
+        if class_idx % 2 == 0:
+            # For even classes, reduce the number of samples according to the imbalance ratio
+            num_samples_to_retain = int(len(samples) * imbalance_ratio)
+            imbalanced_train_data.extend(random.sample(samples, num_samples_to_retain))
+        else:
+            # For odd classes, keep all samples
+            imbalanced_train_data.extend(samples)
+
+    # Shuffle the imbalanced training data
+    random.shuffle(imbalanced_train_data)
+
+    # Extract the data and labels separately
+    imbalanced_train_images = np.array([img for img, _ in imbalanced_train_data])
+    imbalanced_train_labels = np.array([label for _, label in imbalanced_train_data])
+
+    # # Check the new class distribution
+    # class_counts = Counter(imbalanced_train_labels)
+    # print("Class distribution in the imbalanced training dataset:", class_counts)
+
+    # Return the Data object using the imbalanced training data
+    return Data(
+        imbalanced_train_images,
+        torch.LongTensor(imbalanced_train_labels),
+        data_test.data,
+        torch.LongTensor(data_test.targets),
+        handler,
+        args_task
+    )
+def get_CIFAR100_overlapping_classes(handler, args_task, overlapping_classes=None):
+    """
+    Load the CIFAR-100 dataset and filter it to include only the specified overlapping classes.
+    
+    Args:
+        handler: Data handler for further processing.
+        args_task: Additional arguments for the task.
+        overlapping_classes (list): List of class names to include in the experiment.
+    
+    Returns:
+        Filtered CIFAR-100 dataset containing only the overlapping classes.
+    """
+    # Default overlapping classes if not provided
+    if overlapping_classes is None:
+        overlapping_classes = ["forest", "plain", "lion", "tiger", "cloud", "mountain", "bed", "couch", "apple", "pear"]
+
+    # Load the CIFAR-100 dataset with fine labels (i.e., the actual class names)
+    data_train = datasets.CIFAR100('./data/CIFAR100', train=True, download=True)
+    data_test = datasets.CIFAR100('./data/CIFAR100', train=False, download=True)
+
+    # Get the class to index mapping
+    class_to_idx = data_train.class_to_idx
+
+    # Find the indices corresponding to the overlapping classes
+    overlapping_indices = [class_to_idx[cls] for cls in overlapping_classes if cls in class_to_idx]
+
+    # Filter the training data for only the overlapping classes
+    train_images = []
+    train_labels = []
+    for img, label in zip(data_train.data, data_train.targets):
+        if label in overlapping_indices:
+            train_images.append(img)
+            train_labels.append(label)
+    
+    # Filter the test data for only the overlapping classes
+    test_images = []
+    test_labels = []
+    for img, label in zip(data_test.data, data_test.targets):
+        if label in overlapping_indices:
+            test_images.append(img)
+            test_labels.append(label)
+
+    # Check the new class distribution
+    train_class_counts = Counter(train_labels)
+    test_class_counts = Counter(test_labels)
+    print("Class distribution in the filtered training dataset:", train_class_counts)
+    print("Class distribution in the filtered test dataset:", test_class_counts)
+
+    # Return the Data object using the filtered datasets
+    return Data(
+        np.array(train_images),
+        torch.LongTensor(train_labels),
+        np.array(test_images),
+        torch.LongTensor(test_labels),
+        handler,
+        args_task
+    )
 def get_TinyImageNet(handler, args_task):
     import cv2
     # URL to the Tiny ImageNet dataset (you might need to update this URL)
