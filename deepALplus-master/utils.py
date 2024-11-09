@@ -1,7 +1,7 @@
 from torchvision import transforms
 from handlers import MNIST_Handler, SVHN_Handler, CIFAR10_Handler, openml_Handler, MNIST_Handler_joint, SVHN_Handler_joint, CIFAR10_Handler_joint
 from data import get_MNIST, get_FashionMNIST, get_EMNIST, get_SVHN, get_CIFAR10, get_CIFAR10_imb, get_CIFAR100,  \
-								get_TinyImageNet, get_openml, get_BreakHis, get_PneumoniaMNIST, get_waterbirds
+								get_TinyImageNet, get_openml, get_BreakHis, get_PneumoniaMNIST, get_waterbirds, get_CIFAR100_imbalanced, get_CIFAR100_overlapping_classes
 from nets import Net, MNIST_Net, CIFAR10_Net, openml_Net, PneumoniaMNIST_Net, waterbirds_Net, get_net_vae
 from nets_lossprediction import Net_LPL, MNIST_Net_LPL, CIFAR10_Net_LPL, PneumoniaMNIST_Net_LPL, waterbirds_Net_LPL, get_lossnet
 from nets_waal import Net_WAAL, MNIST_Net_WAAL, CIFAR10_Net_WAAL, waterbirds_Net_WAAL, CLF_WAAL, Discriminator
@@ -102,6 +102,10 @@ def get_dataset(name, args_task):
 		return get_CIFAR10_imb(get_handler(name), args_task)
 	elif name == 'CIFAR100':
 		return get_CIFAR100(get_handler(name), args_task)
+	elif name == 'CIFAR100_imb':
+		return get_CIFAR100_imbalanced(get_handler(name), args_task)
+	elif name == 'CIFAR100_over':
+		return get_CIFAR100_overlapping_classes(get_handler(name), args_task)
 	elif name == 'TinyImageNet':
 		return get_TinyImageNet(get_handler(name), args_task)
 	elif name == 'openml':
