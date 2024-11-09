@@ -6,6 +6,7 @@ from torchvision import datasets
 from PIL import Image
 import requests
 import zipfile
+from collections import Counter
 from sklearn.metrics import f1_score, confusion_matrix
 
 class Data:
