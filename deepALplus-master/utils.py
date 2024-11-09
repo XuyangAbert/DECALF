@@ -38,7 +38,7 @@ def get_handler(name):
 		return CIFAR10_Handler
 	elif name == 'CIFAR100_imb':
 		return CIFAR10_Handler
-	elif name == 'CIFAR10_over':
+	elif name == 'CIFAR100_over':
 		return CIFAR10_Handler
 	elif name == 'CIFAR100':
 		return CIFAR10_Handler
