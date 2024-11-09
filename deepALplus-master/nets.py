@@ -117,7 +117,7 @@ class Net:
 			    embeddings = np.concatenate([embeddings, x.numpy()])
 		    i += 1
 	    # embeddings_array = np.array(embeddings)
-	    print(embeddings.shape)
+	    # print(embeddings.shape)
 	    return embeddings
     
     def get_grad_embeddings(self, data):
