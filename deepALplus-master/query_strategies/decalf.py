@@ -98,7 +98,8 @@ class DECALF(Strategy):
                                   query_priority[sortIndex1[:round(len(query_priority) / 2)]],
                                   curr_dist, dth, math.ceil(num_queries * 0.5)) # 0.5
       # fil_index = sortIndex1[-int(round(len(query_priority) / 2)):] 
-      fil_index = fil_index[sortIndex2[:int(round(num_queries * 0.8))]]
+      fil_index = sortIndex1[-int(round(len(query_priority) / 2)):] 
+      # fil_index = fil_index[sortIndex2[:int(round(num_queries * 0.8))]]
       d2 = []
       inter_dist = squareform(pdist(cluster_centers))
       center_priority = []
@@ -106,8 +107,8 @@ class DECALF(Strategy):
         center_priority.append(np.sum(1+np.exp(-inter_dist[i_2,:])))
       center_priority = np.array(center_priority)
       global_center = cluster_centers[np.argmax(center_priority)]
-      temp_neigh1 = global_center
-      temp_neigh2 = cluster_centers[np.argsort(temp_interdist)[1],:]
+      # temp_neigh1 = global_center
+      # temp_neigh2 = cluster_centers[np.argsort(temp_interdist)[1],:]
       for k in range(len(fil_index)):
         temp_d1 = np.linalg.norm(samples[curr_cluster[fil_index[k]], :] - temp_neigh1)
         temp_d2 = np.linalg.norm(samples[curr_cluster[fil_index[k]], :] - temp_neigh2)
