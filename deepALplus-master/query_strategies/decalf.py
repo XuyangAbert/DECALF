@@ -108,7 +108,8 @@ class DECALF(Strategy):
       center_priority = np.array(center_priority)
       global_center = cluster_centers[np.argmax(center_priority)]
       # temp_neigh1 = global_center
-      # temp_neigh2 = cluster_centers[np.argsort(temp_interdist)[1],:]
+      temp_neigh1 = cluster_centers[np.argsort(temp_interdist)[1],:]
+      temp_neigh2 = cluster_centers[np.argsort(temp_interdist)[2],:]
       for k in range(len(fil_index)):
         temp_d1 = np.linalg.norm(samples[curr_cluster[fil_index[k]], :] - temp_neigh1)
         temp_d2 = np.linalg.norm(samples[curr_cluster[fil_index[k]], :] - temp_neigh2)
