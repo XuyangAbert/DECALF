@@ -177,6 +177,8 @@ def get_net_lpl(name, args_task, device):
 		return Net_LPL(CIFAR10_Net_LPL, args_task, device, loss_net)
 	elif name == 'CIFAR100':
 		return Net_LPL(CIFAR10_Net_LPL, args_task, device, loss_net)
+	elif name == 'CIFAR100_imb':
+		return Net_LPL(CIFAR10_Net_LPL, args_task, device, loss_net)
 	elif name == 'TinyImageNet':
 		return Net_LPL(CIFAR10_Net_LPL, args_task, device, loss_net)
 	elif name == 'openml':
@@ -210,6 +212,8 @@ def get_net_waal(name, args_task, device):
 	elif name == 'CIFAR10_imb':
 		return Net_WAAL(CIFAR10_Net_WAAL, args_task, device, CIFAR10_Net_WAAL, CLF_WAAL, Discriminator, handler_joint)
 	elif name == 'CIFAR100':
+		return Net_WAAL(CIFAR10_Net_WAAL, args_task, device, CIFAR10_Net_WAAL, CLF_WAAL, Discriminator, handler_joint)
+	elif name == 'CIFAR100_imb':
 		return Net_WAAL(CIFAR10_Net_WAAL, args_task, device, CIFAR10_Net_WAAL, CLF_WAAL, Discriminator, handler_joint)
 	elif name == 'TinyImageNet':
 		return Net_WAAL(CIFAR10_Net_WAAL, args_task, device, CIFAR10_Net_WAAL, CLF_WAAL, Discriminator, handler_joint)
