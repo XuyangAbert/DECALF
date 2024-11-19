@@ -144,6 +144,8 @@ def get_net(name, args_task, device):
 		return Net(CIFAR10_Net, args_task, device)
 	elif name == 'CIFAR100':
 		return Net(CIFAR10_Net, args_task, device)
+	elif name == 'CIFAR100_imb':
+		return Net(CIFAR10_Net, args_task, device)
 	elif name == 'TinyImageNet':
 		return Net(CIFAR10_Net, args_task, device)
 	elif name == 'openml':
