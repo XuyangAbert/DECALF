@@ -446,7 +446,7 @@ def get_openml(handler, args_task, selection = 6):
 
 def get_BreakHis(handler, args_task):
     # download data from https://www.kaggle.com/datasets/ambarish/breakhis and unzip it in data/BreakHis/
-    data_dir = './data/BreakHis/BreaKHis_v1/histology_slides/breast'
+    data_dir = './data/BreaKHis_v1/BreaKHis_v1/histology_slides/breast'
     data = datasets.ImageFolder(root = data_dir, transform = None).imgs
     train_ratio = 0.7
     test_ratio = 0.3
