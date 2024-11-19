@@ -172,6 +172,7 @@ def get_CIFAR100_imbalanced(handler, args_task):
 
     # Create an imbalanced dataset by reducing samples for some classes
     imbalanced_train_data = []
+    imbalance_ratio = 0.1
     for class_idx, samples in class_data.items():
         if class_idx % 2 == 0:
             # For even classes, reduce the number of samples according to the imbalance ratio
