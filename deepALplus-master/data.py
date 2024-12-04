@@ -115,6 +115,27 @@ def get_MNIST(handler, args_task):
     raw_test = datasets.MNIST('./data/MNIST', train=False, download=True)
     return Data(raw_train.data, raw_train.targets, raw_test.data, raw_test.targets, handler, args_task)
 
+def get_MNIST_imb(handler, args_task):
+    raw_train = datasets.MNIST('./data/MNIST', train=True, download=True)
+    raw_test = datasets.MNIST('./data/MNIST', train=False, download=True)
+    X_tr = raw_train.data
+    Y_tr = torch.from_numpy(np.array(data_train.targets)).long()
+    X_te = raw_test.data
+    Y_te = torch.from_numpy(np.array(data_test.targets)).long()
+    ratio = [0.4, 0.4, 0.8, 0.8, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+    X_tr_imb = []
+    Y_tr_imb = []
+    random.seed(4666)
+    for i in range(Y_tr.shape[0]):
+        tmp = random.random()
+        if tmp < ratio[Y_tr[i]]:
+            X_tr_imb.append(X_tr[i])
+            Y_tr_imb.append(Y_tr[i])
+    X_tr_imb = np.array(X_tr_imb).astype(X_tr.dtype)
+    Y_tr_imb = torch.LongTensor(np.array(Y_tr_imb)).type_as(Y_tr)
+    return Data(X_tr_imb, Y_tr_imb, X_te, Y_te, handler, args_task)
+
+
 def get_FashionMNIST(handler, args_task):
     raw_train = datasets.FashionMNIST('./data/FashionMNIST', train=True, download=True)
     raw_test = datasets.FashionMNIST('./data/FashionMNIST', train=False, download=True)
