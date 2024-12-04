@@ -145,9 +145,9 @@ def get_FashionMNIST_imb(handler, args_task):
     raw_train = datasets.FashionMNIST('./data/FashionMNIST', train=True, download=True)
     raw_test = datasets.FashionMNIST('./data/FashionMNIST', train=False, download=True)
     X_tr = raw_train.data
-    Y_tr = torch.from_numpy(np.array(data_train.targets)).long()
+    Y_tr = torch.from_numpy(np.array(raw_train.targets)).long()
     X_te = raw_test.data
-    Y_te = torch.from_numpy(np.array(data_test.targets)).long()
+    Y_te = torch.from_numpy(np.array(raw_test.targets)).long()
     ratio = [0.4, 0.4, 0.8, 0.8, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
     X_tr_imb = []
     Y_tr_imb = []
