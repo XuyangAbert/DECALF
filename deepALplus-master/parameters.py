@@ -38,6 +38,17 @@ args_pool = {'MNIST':
 				 'num_class':10,
 				 'pretrained': False,
 				 'optimizer_args':{'lr': 0.001}},
+	     		'FashionMNIST_imb':
+				{'n_epoch': 20,  
+				 'name': 'FashionMNIST',
+				 'transform_train': transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.286,), (0.3529,))]),
+				 'transform': transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.286,), (0.3529,))]),
+				 'loader_tr_args':{'batch_size': 128, 'num_workers': 4},
+				 'loader_te_args':{'batch_size': 1000, 'num_workers': 4},
+				 'optimizer':'Adam',
+				 'num_class':10,
+				 'pretrained': False,
+				 'optimizer_args':{'lr': 0.001}},
 			'EMNIST':
 				{'n_epoch': 20,  
 				 'name': 'EMNIST',
