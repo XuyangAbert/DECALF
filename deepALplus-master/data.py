@@ -157,7 +157,7 @@ def get_FashionMNIST_imb(handler, args_task):
         if tmp < ratio[Y_tr[i]]:
             X_tr_imb.append(X_tr[i])
             Y_tr_imb.append(Y_tr[i])
-    X_tr_imb = np.array(X_tr_imb).astype(X_tr.dtype)
+    X_tr_imb = np.array(X_tr_imb).astype(np.uint8)
     Y_tr_imb = torch.LongTensor(np.array(Y_tr_imb)).type_as(Y_tr)
     return Data(X_tr_imb, Y_tr_imb, X_te, Y_te, handler, args_task)
 
