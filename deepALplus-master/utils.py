@@ -1,6 +1,6 @@
 from torchvision import transforms
 from handlers import MNIST_Handler, SVHN_Handler, CIFAR10_Handler, openml_Handler, MNIST_Handler_joint, SVHN_Handler_joint, CIFAR10_Handler_joint
-from data import get_MNIST, get_FashionMNIST, get_EMNIST, get_SVHN, get_CIFAR10, get_CIFAR10_imb, get_CIFAR100,  \
+from data import get_MNIST, get_FashionMNIST, get_FashionMNIST_imb, get_EMNIST, get_SVHN, get_CIFAR10, get_CIFAR10_imb, get_CIFAR100,  \
 								get_TinyImageNet, get_openml, get_BreakHis, get_PneumoniaMNIST, get_waterbirds, get_CIFAR100_imbalanced, get_CIFAR100_overlapping_classes
 from nets import Net, MNIST_Net, CIFAR10_Net, openml_Net, PneumoniaMNIST_Net, waterbirds_Net, get_net_vae
 from nets_lossprediction import Net_LPL, MNIST_Net_LPL, CIFAR10_Net_LPL, PneumoniaMNIST_Net_LPL, waterbirds_Net_LPL, get_lossnet
@@ -27,6 +27,8 @@ def get_handler(name):
 	elif name == 'MNIST_pretrain':
 		return MNIST_Handler
 	elif name == 'FashionMNIST':
+		return MNIST_Handler
+	elif name == 'FashionMNIST_imb':
 		return MNIST_Handler
 	elif name == 'EMNIST':
 		return MNIST_Handler
@@ -64,6 +66,8 @@ def get_handler_joint(name):
 		return MNIST_Handler_joint
 	elif name == 'FashionMNIST':
 		return MNIST_Handler_joint
+	elif name == 'FashionMNIST_imb':
+		return MNIST_Handler_joint
 	elif name == 'EMNIST':
 		return MNIST_Handler_joint
 	elif name == 'SVHN':
@@ -96,6 +100,8 @@ def get_dataset(name, args_task):
 		return get_MNIST(get_handler(name), args_task)
 	elif name == 'FashionMNIST':
 		return get_FashionMNIST(get_handler(name), args_task)
+	elif name == 'FashionMNIST_imb':
+		return get_FashionMNIST_imb(get_handler(name), args_task)
 	elif name == 'EMNIST':
 		return get_EMNIST(get_handler(name), args_task)
 	elif name == 'SVHN':
@@ -134,6 +140,8 @@ def get_net(name, args_task, device):
 		return Net(MNIST_Net, args_task, device)
 	elif name == 'FashionMNIST':
 		return Net(MNIST_Net, args_task, device)
+	elif name == 'FashionMNIST_imb':
+		return Net(MNIST_Net, args_task, device)
 	elif name == 'EMNIST':
 		return Net(MNIST_Net, args_task, device)
 	elif name == 'SVHN':
@@ -168,6 +176,8 @@ def get_net_lpl(name, args_task, device):
 	elif name == 'MNIST_pretrain':
 		return Net_LPL(MNIST_Net_LPL, args_task, device, loss_net)
 	elif name == 'FashionMNIST':
+		return Net_LPL(MNIST_Net_LPL, args_task, device, loss_net)
+	elif name == 'FashionMNIST_imb':
 		return Net_LPL(MNIST_Net_LPL, args_task, device, loss_net)
 	elif name == 'EMNIST':
 		return Net_LPL(MNIST_Net_LPL, args_task, device, loss_net)
@@ -204,6 +214,8 @@ def get_net_waal(name, args_task, device):
 	elif name == 'MNIST_pretrain':
 		return Net_WAAL(MNIST_Net_WAAL, args_task, device, MNIST_Net_WAAL, CLF_WAAL, Discriminator, handler_joint)
 	elif name == 'FashionMNIST':
+		return Net_WAAL(MNIST_Net_WAAL, args_task, device, MNIST_Net_WAAL, CLF_WAAL, Discriminator, handler_joint)
+	elif name == 'FashionMNIST_imb':
 		return Net_WAAL(MNIST_Net_WAAL, args_task, device, MNIST_Net_WAAL, CLF_WAAL, Discriminator, handler_joint)
 	elif name == 'EMNIST':
 		return Net_WAAL(MNIST_Net_WAAL, args_task, device, MNIST_Net_WAAL, CLF_WAAL, Discriminator, handler_joint)
