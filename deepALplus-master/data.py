@@ -145,6 +145,7 @@ def get_FashionMNIST_imb(handler, args_task):
     raw_train = datasets.FashionMNIST('./data/FashionMNIST', train=True, download=True)
     raw_test = datasets.FashionMNIST('./data/FashionMNIST', train=False, download=True)
     X_tr = raw_train.data
+    # print(X_tr.dtype())
     Y_tr = torch.from_numpy(np.array(raw_train.targets)).long()
     X_te = raw_test.data
     Y_te = torch.from_numpy(np.array(raw_test.targets)).long()
