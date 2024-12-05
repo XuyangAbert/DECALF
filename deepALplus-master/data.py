@@ -122,7 +122,7 @@ def get_MNIST_imb(handler, args_task):
     Y_tr = torch.from_numpy(np.array(data_train.targets)).long()
     X_te = raw_test.data
     Y_te = torch.from_numpy(np.array(data_test.targets)).long()
-    ratio = [0.4, 0.4, 0.8, 0.8, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+    ratio = [0.5, 0.5, 0.8, 0.8, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
     X_tr_imb = []
     Y_tr_imb = []
     random.seed(4666)
