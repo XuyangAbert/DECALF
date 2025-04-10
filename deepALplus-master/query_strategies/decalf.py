@@ -28,7 +28,6 @@ from sklearn.linear_model import LogisticRegression as LR
 from sklearn.svm import SVC,LinearSVC
 import math
 import warnings
-warnings.filterwarnings("ignore", category=np.VisibleDeprecationWarning)
 
 class DECALF(Strategy):
   def __init__(self, dataset, net, args_input, args_task):
