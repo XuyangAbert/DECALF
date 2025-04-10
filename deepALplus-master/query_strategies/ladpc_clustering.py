@@ -12,8 +12,6 @@ from sklearn.metrics import f1_score,precision_score,auc
 from sklearn.metrics import accuracy_score,recall_score
 from sklearn.linear_model import LogisticRegression as LR
 from sklearn.svm import SVC,LinearSVC
-import warnings
-warnings.filterwarnings("ignore", category=np.VisibleDeprecationWarning)
 
 
 class ladpc_analysis(object):
