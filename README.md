@@ -78,7 +78,7 @@ Our model achieves the following performance on :
 
 | Model name         | Top 1 Accuracy (20% labeled data) | F1 score (20% labeled data) |
 | ------------------ |---------------- | -------------- |
-| ResNet-18 + DECALF (Proposed) |     26.18%         |      15.73%       |
+| ResNet-18 + DECALF (Proposed) |     26.18%         |      25.73%       |
 
 ## Contributing
 
