@@ -1,6 +1,6 @@
 # My Paper Title
 
-This repository is the official implementation of [Deep Active Learning using Clustering-based Sampling for High-dimensional Image Classification]. 
+This repository is the official implementation of [A deep active learning approach for label-efficient image classification using density-based clustering], which is currently submitted to the Springer Pattern Analysis and Applications Journal.
 
 ## Requirements
 
