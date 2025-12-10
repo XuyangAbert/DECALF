@@ -27,7 +27,7 @@ pip install -r requirements.txt
 12. wilds==2.0.0
 
 ## Example running experiments
-For the pytorch implementation, use the google colab with A100 GPU instance by running the `calfd_pytorch_demo.py` file. User can upload it as the notebook and run the code in google colab. 
+For the pytorch implementation, use the google colab with A100 GPU instance by running the `decalf_pytorch_demo.py` file. User can upload it as the notebook and run the code in google colab. 
 
 User can change the variable `ALStrategy` to change the AL method. The label budget can be adjusted by adjusting the parameters below:
 
