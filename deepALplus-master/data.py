@@ -7,7 +7,7 @@ from PIL import Image
 import requests
 import zipfile
 from collections import Counter
-from sklearn.metrics import f1_score, confusion_matrix
+from sklearn.metrics import f1_score, confusion_matrix, balanced_accuracy_score
 
 class Data:
     def __init__(self, X_train, Y_train, X_test, Y_test, handler, args_task):
@@ -66,6 +66,9 @@ class Data:
 
     def cal_test_f1(self, preds):
         return f1_score(self.Y_test, preds, average='macro')
+
+    def cal_test_balanced_acc(self, preds):
+        return balanced_accuracy_score(self.Y_test, preds)
 
     def cal_classwise_metrics(self, preds):
         cm = confusion_matrix(self.Y_test, preds)
