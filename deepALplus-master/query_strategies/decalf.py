@@ -121,7 +121,7 @@ class DECALF(Strategy):
       # fet2 = curr_cluster[fil_index[sortIndex2[-math.ceil(num_queries * 0.5):]]]
       fet2 = self.diversityfetch2(fil_index, curr_cluster,
                                   d2, curr_dist, dth,
-                                  math.ceil(num_queries * 0.5))
+                                  math.ceil(num_queries * 1)) # 0.5
       # query_idx = np.append(query_idx, fet1)
       query_idx = np.append(query_idx, fet2)
     print('No of unique idxs:', len(np.unique(query_idx)))
