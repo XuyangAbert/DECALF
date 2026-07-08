@@ -87,7 +87,7 @@ class ladpc_analysis(object):
         pop_Index = np.arange(0, N)
         pop = sample[pop_Index, :]
         # Calculate the initial niche radius
-        radius = numpy.linalg.norm((maxLimit - minLimit)) * 0.4  # 0.4 0.5
+        radius = numpy.linalg.norm((maxLimit - minLimit)) * 0.2  # 0.4 0.5
 
         return [stdData, pop_Index, pop, radius, PreMu, PreStd]
 
