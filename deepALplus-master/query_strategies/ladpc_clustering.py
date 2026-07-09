@@ -123,9 +123,9 @@ class ladpc_analysis(object):
             den1 = []
             den2 = []
             for i in range(N - 1):
-                # Diff = np.power(Dist[i, :], 2)
+                Diff = np.power(Dist[i, :], 2)
                 # Diff = np.power(Dist[i, :], 1)
-                Diff = Dist[i, :]
+                # Diff = Dist[i, :]
                 temp1 = np.power(np.exp(-Diff / stdData), gamma * m)
                 temp2 = np.power(np.exp(-Diff / stdData), gamma * (m + 1))
                 den1.append(np.sum(temp1))
@@ -151,9 +151,9 @@ class ladpc_analysis(object):
             den1 = []
             den2 = []
             for i in range(N):
-                # Diff = np.power(Dist[i, 0:N1], 2)
+                Diff = np.power(Dist[i, 0:N1], 2)
                 # Diff = np.power(Dist[i, 0:N1], 1)
-                Diff = Dist[i, 0:N1]
+                # Diff = Dist[i, 0:N1]
                 temp1 = np.power(np.exp(-Diff / stdData), gam1)
                 temp2 = np.power(np.exp(-Diff / stdData), gam2)
                 sum1 = np.sum(temp1)
